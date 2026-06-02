@@ -17,14 +17,26 @@ export class GetCollectionUseCase {
     const allCards = await this.cardRepository.findAll();
     const userInventory = await this.userCardRepository.findByUser(userId);
 
-    // Mapear el inventario del usuario para acceso rápido: cardId -> { countNormal, countSpecial }
-    const inventoryMap = new Map<string, { countNormal: number; countSpecial: number }>();
+    // Mapear el inventario del usuario para acceso rápido: cardId -> { countNormal, levelNormal, countSpecial, levelSpecial }
+    const inventoryMap = new Map<string, {
+      countNormal: number;
+      levelNormal: number;
+      countSpecial: number;
+      levelSpecial: number;
+    }>();
     for (const uc of userInventory) {
-      const existing = inventoryMap.get(uc.cardId) || { countNormal: 0, countSpecial: 0 };
+      const existing = inventoryMap.get(uc.cardId) || {
+        countNormal: 0,
+        levelNormal: 1,
+        countSpecial: 0,
+        levelSpecial: 1,
+      };
       if (uc.isSpecial) {
         existing.countSpecial += uc.count;
+        existing.levelSpecial = uc.level;
       } else {
         existing.countNormal += uc.count;
+        existing.levelNormal = uc.level;
       }
       inventoryMap.set(uc.cardId, existing);
     }
@@ -41,7 +53,9 @@ export class GetCollectionUseCase {
         ...card,
         owned: isOwned,
         countNormal: owned ? owned.countNormal : 0,
+        levelNormal: owned ? owned.levelNormal : 1,
         countSpecial: owned ? owned.countSpecial : 0,
+        levelSpecial: owned ? owned.levelSpecial : 1,
       };
     });
 

@@ -69,4 +69,24 @@ export class PrismaUserCardRepository implements IUserCardRepository {
     });
     return PrismaMapper.toUserCardDomain(userCard);
   }
+
+  async updateCardLevelAndCount(userId: number, cardId: string, isSpecial: boolean, count: number, level: number): Promise<UserCard> {
+    const userCard = await this.prisma.userCard.update({
+      where: {
+        userId_cardId_isSpecial: {
+          userId,
+          cardId,
+          isSpecial,
+        },
+      },
+      data: {
+        count,
+        level,
+      },
+      include: {
+        card: true,
+      },
+    });
+    return PrismaMapper.toUserCardDomain(userCard);
+  }
 }

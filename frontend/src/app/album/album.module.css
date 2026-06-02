@@ -286,3 +286,159 @@
   justify-content: flex-end;
   margin-top: 16px;
 }
+
+/* Tabs de versión */
+.versionSelector {
+  display: flex;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 20px;
+  gap: 16px;
+}
+
+.versionTab {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-weight: 700;
+  padding: 10px 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.versionTab:hover:not(:disabled) {
+  color: var(--text-primary);
+}
+
+.versionTabActive {
+  color: var(--text-primary) !important;
+  border-bottom-color: var(--text-primary);
+}
+
+/* Panel de actualización */
+.upgradeSection {
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid var(--border-color);
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 0px;
+}
+
+.upgradeMessage {
+  padding: 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  border-radius: 0px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.upgradeSuccess {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgb(16, 185, 129);
+  color: rgb(16, 185, 129);
+}
+
+.upgradeError {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgb(239, 68, 68);
+  color: rgb(239, 68, 68);
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.statBox {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 12px;
+  border-radius: 0px;
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+}
+
+.statLabel {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.statValue {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.upgradeCostGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+  background: rgba(0, 0, 0, 0.1);
+  padding: 12px;
+  border-radius: 0px;
+}
+
+.costItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.costLabel {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.costValue {
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.costSuccess {
+  color: #10b981;
+}
+
+.costFail {
+  color: #ef4444;
+}
+
+.upgradeBtn {
+  width: 100%;
+  background: #fafafa;
+  color: #09090b;
+  border: 1px solid #fafafa;
+  padding: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 0px;
+}
+
+.upgradeBtn:hover:not(:disabled) {
+  background: #e4e4e7;
+  border-color: #e4e4e7;
+}
+
+.upgradeBtn:disabled {
+  background: #27272a;
+  border: 1px solid #27272a;
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+

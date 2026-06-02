@@ -9,8 +9,8 @@
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
-  transition: transform 0.1s ease, box-shadow 0.3s ease;
-  border-radius: 0px;
+  transition: transform 0.1s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  border-radius: 0px; /* Quadratic minimalist design */
   background: var(--bg-surface-opaque);
   border: 1px solid var(--border-color);
   overflow: hidden;
@@ -19,12 +19,17 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
+.cardWrapper:hover .card {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
+  border-color: #52525b;
+}
+
 .cardInner {
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
-  padding: 12px;
+  padding: 14px; /* More breathing room */
   z-index: 2;
   pointer-events: none;
 }
@@ -38,6 +43,27 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 8px;
+}
+
+.nameWrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow: hidden;
+}
+
+.levelBadge {
+  font-size: 0.6rem;
+  font-weight: 800;
+  background: #27272a;
+  border: 1px solid #52525b;
+  color: var(--text-primary);
+  padding: 1px 4.5px;
+  border-radius: 0px;
+  line-height: 1;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  letter-spacing: 0.3px;
 }
 
 .name {
@@ -166,5 +192,16 @@
   height: 100%;
   z-index: 3;
   pointer-events: none;
-  box-shadow: inset 0 0 0 4px #fbbf24;
+  box-shadow: inset 0 0 0 1px rgba(251, 191, 36, 0.6);
+  background: linear-gradient(
+    115deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.05) 40%,
+    rgba(255, 255, 255, 0.12) 50%,
+    rgba(255, 255, 255, 0.05) 60%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: holographic-shine 4s linear infinite;
+  opacity: 0.9;
 }

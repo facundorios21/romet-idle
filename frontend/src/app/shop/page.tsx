@@ -41,6 +41,8 @@ export default function ShopPage() {
   const [rolledCards, setRolledCards] = useState<RollCard[]>([]);
   const [revealedCards, setRevealedCards] = useState<Record<number, boolean>>({});
   const [isPackUnwrapped, setIsPackUnwrapped] = useState(false);
+  const [isUnwrapping, setIsUnwrapping] = useState(false);
+  const [showFlash, setShowFlash] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [packs, setPacks] = useState<Pack[]>([]);
   const [loadingPacks, setLoadingPacks] = useState(true);
@@ -90,6 +92,8 @@ export default function ShopPage() {
     setRolledCards([]);
     setRevealedCards({});
     setIsPackUnwrapped(false);
+    setIsUnwrapping(false);
+    setShowFlash(false);
 
     // Descuento optimista localmente
     deductCoins(pack.cost);
@@ -112,7 +116,16 @@ export default function ShopPage() {
   };
 
   const handleUnwrapPack = () => {
-    setIsPackUnwrapped(true);
+    if (isUnwrapping) return;
+    setIsUnwrapping(true);
+    setTimeout(() => {
+      setIsPackUnwrapped(true);
+      setIsUnwrapping(false);
+      setShowFlash(true);
+      setTimeout(() => {
+        setShowFlash(false);
+      }, 500);
+    }, 1500);
   };
 
   const handleCardReveal = (index: number) => {
@@ -124,6 +137,8 @@ export default function ShopPage() {
     setRolledCards([]);
     setRevealedCards({});
     setIsPackUnwrapped(false);
+    setIsUnwrapping(false);
+    setShowFlash(false);
     // Sincronizar el balance definitivo con la BD
     claimIdleCoins();
   };
@@ -188,10 +203,16 @@ export default function ShopPage() {
 
             {!error && !isPackUnwrapped && (
               <div className={styles.packOpener}>
-                <div className={styles.unopenedPack} onClick={handleUnwrapPack}>
+                {isUnwrapping && <div className={styles.glowingRays} />}
+                <div
+                  className={`${styles.unopenedPack} ${isUnwrapping ? styles.packUnwrapping : ''}`}
+                  onClick={handleUnwrapPack}
+                >
                   🎁
                 </div>
-                <p className={styles.prompt}>¡Haz clic sobre el sobre para abrirlo!</p>
+                <p className={styles.prompt}>
+                  {isUnwrapping ? '¡La energía mística se acumula!' : '¡Haz clic sobre el sobre para abrirlo!'}
+                </p>
               </div>
             )}
 
@@ -241,6 +262,7 @@ export default function ShopPage() {
             )}
           </div>
         )}
+        {showFlash && <div className={styles.flashOverlay} />}
       </main>
     </>
   );

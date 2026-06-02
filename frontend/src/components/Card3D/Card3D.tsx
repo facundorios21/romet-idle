@@ -15,6 +15,7 @@ interface CardProps {
   countNormal?: number;
   countSpecial?: number;
   isSpecial?: boolean; // Force-render como holographic (para la animación de apertura)
+  level?: number;
 }
 
 export default function Card3D({
@@ -29,6 +30,7 @@ export default function Card3D({
   countNormal = 0,
   countSpecial = 0,
   isSpecial = false,
+  level = 1,
 }: CardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [transform, setTransform] = useState('rotateX(0deg) rotateY(0deg)');
@@ -126,6 +128,7 @@ export default function Card3D({
   };
 
   const isShiny = isSpecial || countSpecial > 0;
+  const scaledPower = Math.round(power * (isShiny ? 1.2 : 1.0) * (1 + (level - 1) * 0.15));
   const borderStyle = owned
     ? ({
         borderColor: getRarityColor(rarity),
@@ -157,14 +160,23 @@ export default function Card3D({
 
         <div className={styles.cardInner}>
           <div className={styles.header}>
-            <span className={styles.name}>{name}</span>
-            {owned && <span className={styles.power}>⚔️ {power}</span>}
+            <div className={styles.nameWrapper}>
+              {owned && level > 1 && <span className={styles.levelBadge}>Lvl.{level}</span>}
+              <span className={styles.name}>{name}</span>
+            </div>
+            {owned && <span className={styles.power}>⚔️ {scaledPower}</span>}
           </div>
 
           <div className={styles.imageArea}>
             {imageUrl ? (
               <img
-                src={imageUrl.startsWith('/') ? imageUrl : `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}${imageUrl}`}
+                src={
+                  imageUrl.startsWith('http://') || imageUrl.startsWith('https://') || imageUrl.startsWith('data:')
+                    ? imageUrl
+                    : imageUrl.startsWith('/uploads/') || imageUrl.startsWith('uploads/')
+                    ? `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}${imageUrl.startsWith('/') ? imageUrl : '/' + imageUrl}`
+                    : imageUrl
+                }
                 alt={name}
                 className={styles.cardImageReal}
               />

@@ -39,6 +39,7 @@ export class PrismaMapper {
       prismaUserCard.userId,
       prismaUserCard.cardId,
       prismaUserCard.count,
+      prismaUserCard.level,
       prismaUserCard.isSpecial,
       prismaUserCard.card ? this.toCardDomain(prismaUserCard.card) : undefined,
     );

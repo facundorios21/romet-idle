@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar/Navbar';
 import Card3D from '@/components/Card3D/Card3D';
 import { apiRequest } from '@/lib/api';
+import { useUser } from '@/context/UserContext';
 import styles from './album.module.css';
 
 interface Card {
@@ -17,9 +18,10 @@ interface Card {
   set: string;
   owned: boolean;
   countNormal: number;
+  levelNormal: number;
   countSpecial: number;
+  levelSpecial: number;
 }
-
 
 interface CollectionStats {
   totalCards: number;
@@ -39,6 +41,12 @@ export default function AlbumPage() {
   const [filterElement, setFilterElement] = useState('ALL');
   const [filterOwned, setFilterOwned] = useState('ALL');
 
+  // Estados del Crafteo
+  const { user, refreshProfile, deductCoins } = useUser();
+  const [previewShiny, setPreviewShiny] = useState(false);
+  const [upgradeLoading, setUpgradeLoading] = useState(false);
+  const [upgradeMessage, setUpgradeMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+
   const fetchCollection = async () => {
     try {
       setLoading(true);
@@ -56,6 +64,63 @@ export default function AlbumPage() {
     fetchCollection();
   }, []);
 
+  const handleInspectCard = (card: Card) => {
+    setInspectedCard(card);
+    setPreviewShiny(card.countSpecial > 0);
+    setUpgradeMessage(null);
+  };
+
+  const handleUpgrade = async () => {
+    if (!inspectedCard) return;
+    setUpgradeMessage(null);
+    setUpgradeLoading(true);
+
+    try {
+      const res = await apiRequest('/collection/upgrade', {
+        method: 'POST',
+        body: JSON.stringify({
+          cardId: inspectedCard.id,
+          isSpecial: previewShiny,
+        }),
+      });
+
+      // Actualizar monedas en el frontend
+      deductCoins(res.coinCost);
+
+      setUpgradeMessage({
+        type: 'success',
+        text: `¡Fusión exitosa! Carta mejorada a Nivel ${res.newLevel}.`,
+      });
+
+      // Actualizar el estado de la carta inspeccionada localmente
+      setInspectedCard((prev) => {
+        if (!prev) return null;
+        return {
+          ...prev,
+          countNormal: previewShiny ? prev.countNormal : res.newCount,
+          levelNormal: previewShiny ? prev.levelNormal : res.newLevel,
+          countSpecial: previewShiny ? res.newCount : prev.countSpecial,
+          levelSpecial: previewShiny ? res.newLevel : prev.levelSpecial,
+        };
+      });
+
+      // Refrescar toda la colección
+      const data = await apiRequest('/collection');
+      setCards(data.cards);
+      setStats(data.stats);
+
+      // Sincronizar el perfil
+      await refreshProfile();
+    } catch (err: any) {
+      setUpgradeMessage({
+        type: 'error',
+        text: err.message || 'Error al realizar el crafteo.',
+      });
+    } finally {
+      setUpgradeLoading(false);
+    }
+  };
+
   const filteredCards = cards.filter((card) => {
     const matchRarity = filterRarity === 'ALL' || card.rarity === filterRarity;
     const matchElement = filterElement === 'ALL' || card.element === filterElement;
@@ -67,13 +132,38 @@ export default function AlbumPage() {
     return matchRarity && matchElement && matchOwned;
   });
 
+  // Cálculo de poder y costos para previsualización
+  const currentLevel = inspectedCard
+    ? previewShiny
+      ? inspectedCard.levelSpecial
+      : inspectedCard.levelNormal
+    : 1;
+
+  const currentCount = inspectedCard
+    ? previewShiny
+      ? inspectedCard.countSpecial
+      : inspectedCard.countNormal
+    : 0;
+
+  const nextLevel = currentLevel + 1;
+  const duplicatesNeeded = currentLevel + 1;
+  const goldNeeded = currentLevel * 100;
+
+  const currentPower = inspectedCard
+    ? Math.round(inspectedCard.power * (previewShiny ? 1.2 : 1.0) * (1 + (currentLevel - 1) * 0.15))
+    : 0;
+
+  const nextPower = inspectedCard
+    ? Math.round(inspectedCard.power * (previewShiny ? 1.2 : 1.0) * (1 + (currentLevel) * 0.15))
+    : 0;
+
   return (
     <>
       <Navbar />
       <main className={styles.container}>
         <div className={styles.header}>
           <h1 className={styles.title}>Álbum de Cartas</h1>
-          <p className={styles.subtitle}>Gestiona tu colección de criaturas míticas.</p>
+          <p className={styles.subtitle}>Gestiona tu colección de criaturas míticas y mejóralas.</p>
         </div>
 
         {error && (
@@ -170,7 +260,7 @@ export default function AlbumPage() {
                 {filteredCards.map((card) => (
                   <div
                     key={card.id}
-                    onClick={() => setInspectedCard(card)}
+                    onClick={() => handleInspectCard(card)}
                     style={{ cursor: 'pointer' }}
                   >
                     <Card3D
@@ -184,6 +274,7 @@ export default function AlbumPage() {
                       owned={card.owned}
                       countNormal={card.countNormal}
                       countSpecial={card.countSpecial}
+                      level={card.countSpecial > 0 ? card.levelSpecial : card.levelNormal}
                     />
                   </div>
                 ))}
@@ -211,7 +302,9 @@ export default function AlbumPage() {
                   imageUrl={inspectedCard.imageUrl}
                   owned={inspectedCard.owned}
                   countNormal={inspectedCard.countNormal}
-                  countSpecial={inspectedCard.countSpecial}
+                  countSpecial={previewShiny ? inspectedCard.countSpecial : 0}
+                  isSpecial={previewShiny}
+                  level={previewShiny ? inspectedCard.levelSpecial : inspectedCard.levelNormal}
                 />
               </div>
 
@@ -230,30 +323,99 @@ export default function AlbumPage() {
                       <span style={{ color: 'var(--text-muted)' }}>•</span>
                       <span>{inspectedCard.element}</span>
                       <span style={{ color: 'var(--text-muted)' }}>•</span>
-                      <span>⚔️ {inspectedCard.power} PODER</span>
+                      <span>⚔️ {currentPower} PODER</span>
                     </div>
                   </div>
+
+                  {/* Selector de versión */}
+                  {inspectedCard.owned && (
+                    <div className={styles.versionSelector}>
+                      <button
+                        className={`${styles.versionTab} ${!previewShiny ? styles.versionTabActive : ''}`}
+                        onClick={() => {
+                          setPreviewShiny(false);
+                          setUpgradeMessage(null);
+                        }}
+                      >
+                        Normal (Lvl.{inspectedCard.levelNormal})
+                      </button>
+                      <button
+                        className={`${styles.versionTab} ${previewShiny ? styles.versionTabActive : ''}`}
+                        onClick={() => {
+                          setPreviewShiny(true);
+                          setUpgradeMessage(null);
+                        }}
+                        disabled={inspectedCard.countSpecial === 0 && inspectedCard.levelSpecial === 1}
+                        style={{
+                          opacity: inspectedCard.countSpecial === 0 && inspectedCard.levelSpecial === 1 ? 0.4 : 1,
+                        }}
+                      >
+                        Shiny (Lvl.{inspectedCard.levelSpecial})
+                      </button>
+                    </div>
+                  )}
 
                   <div className={styles.modalInfoSection}>
                     <h4 className={styles.modalInfoTitle}>Descripción</h4>
                     <p className={styles.modalDescription}>{inspectedCard.description}</p>
                   </div>
 
-                  <div className={styles.modalInfoSection}>
-                    <h4 className={styles.modalInfoTitle}>Estado del Inventario</h4>
-                    <div className={styles.inventoryDetails}>
-                      <div className={styles.invCol}>
-                        <span className={styles.invLabel}>Copias Comunes</span>
-                        <span className={styles.invValue}>{inspectedCard.countNormal}</span>
-                      </div>
-                      <div className={styles.invCol}>
-                        <span className={styles.invLabel}>Copias Shiny (Holo)</span>
-                        <span className={styles.invValue}>{inspectedCard.countSpecial}</span>
-                      </div>
-                    </div>
-                  </div>
+                  {/* Panel de Crafteo / Mejora */}
+                  {inspectedCard.owned && (
+                    <div className={styles.upgradeSection}>
+                      <h4 className={styles.modalInfoTitle}>Transmutación del Alquimista</h4>
+                      
+                      {upgradeMessage && (
+                        <div className={`${styles.upgradeMessage} ${upgradeMessage.type === 'success' ? styles.upgradeSuccess : styles.upgradeError}`}>
+                          {upgradeMessage.text}
+                        </div>
+                      )}
 
-                  <div className={styles.modalInfoSection}>
+                      <div className={styles.statsGrid}>
+                        <div className={styles.statBox}>
+                          <span className={styles.statLabel}>Nivel</span>
+                          <span className={styles.statValue}>
+                            {currentLevel} <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>➔ {nextLevel}</span>
+                          </span>
+                        </div>
+                        <div className={styles.statBox}>
+                          <span className={styles.statLabel}>Poder de Ataque</span>
+                          <span className={styles.statValue} style={{ color: '#ec4899' }}>
+                            ⚔️ {currentPower} <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>➔ {nextPower}</span>
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className={styles.upgradeCostGrid}>
+                        <div className={styles.costItem}>
+                          <span className={styles.costLabel}>Duplicados Consumidos</span>
+                          <span className={`${styles.costValue} ${currentCount >= duplicatesNeeded ? styles.costSuccess : styles.costFail}`}>
+                            {currentCount} / {duplicatesNeeded}
+                          </span>
+                        </div>
+                        <div className={styles.costItem}>
+                          <span className={styles.costLabel}>Costo en Esencias</span>
+                          <span className={`${styles.costValue} ${(user?.coins || 0) >= goldNeeded ? styles.costSuccess : styles.costFail}`}>
+                            {(user?.coins || 0).toFixed(0)} / {goldNeeded}
+                          </span>
+                        </div>
+                      </div>
+
+                      <button
+                        className={styles.upgradeBtn}
+                        onClick={handleUpgrade}
+                        disabled={
+                          upgradeLoading ||
+                          currentCount < duplicatesNeeded ||
+                          (user?.coins || 0) < goldNeeded
+                        }
+                      >
+                        {upgradeLoading ? 'Transmutando Cartas...' : 'Mejorar Carta'}
+                      </button>
+                    </div>
+                  )}
+
+                  <div className={styles.modalInfoSection} style={{ marginTop: 'auto' }}>
                     <h4 className={styles.modalInfoTitle}>Detalles del Set</h4>
                     <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
                       Set:{' '}

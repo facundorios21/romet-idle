@@ -3,6 +3,7 @@
 :root {
   /* Color Palette (Sober, Minimalist Matte Dark) */
   --bg-main: #0a0a0c;
+  --bg-body: var(--bg-main);
   --bg-surface: #121215;
   --bg-surface-opaque: #16161a;
   --border-color: #27272a;
@@ -87,20 +88,28 @@ button {
 }
 
 .glass-input {
-  background: #0a0a0c;
+  background: rgba(10, 10, 12, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1px solid var(--border-color);
   border-radius: 0px;
   color: var(--text-primary);
   font-family: var(--font-sans);
   font-size: 0.95rem;
-  padding: 10px 14px;
-  transition: all 0.2s ease;
+  padding: 12px 16px;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
   width: 100%;
   outline: none;
 }
 
+.glass-input:hover {
+  border-color: #3f3f46;
+  background: rgba(15, 15, 18, 0.8);
+}
+
 .glass-input:focus {
-  border-color: #52525b;
+  border-color: var(--text-primary);
+  background: rgba(10, 10, 12, 0.9);
 }
 
 /* Botones Planos, Sobrios y Cuadrados */

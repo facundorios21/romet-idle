@@ -233,3 +233,53 @@
   color: var(--text-secondary);
 }
 
+.packUnwrapping {
+  animation: shakeAndGlow 1.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes shakeAndGlow {
+  10%, 90% { transform: translate3d(-3px, 0, 0) scale(1.05); }
+  20%, 80% { transform: translate3d(5px, 0, 0) scale(1.1); }
+  30%, 50%, 70% { transform: translate3d(-10px, 0, 0) scale(1.18); }
+  40%, 60% { transform: translate3d(10px, 0, 0) scale(1.25); }
+  100% { transform: scale(3.5) rotate(15deg); filter: brightness(4) blur(1px); opacity: 0; }
+}
+
+.glowingRays {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.45) 0%, rgba(236, 72, 153, 0) 70%);
+  border-radius: 50%;
+  z-index: -1;
+  animation: rotateRays 1.5s linear infinite, pulseRays 1.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes rotateRays {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes pulseRays {
+  0%, 100% { transform: scale(1); opacity: 0.4; }
+  50% { transform: scale(1.7); opacity: 1; }
+}
+
+.flashOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #ffffff;
+  z-index: 1200;
+  pointer-events: none;
+  animation: fadeOutFlash 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes fadeOutFlash {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+

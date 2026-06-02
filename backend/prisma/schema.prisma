@@ -39,6 +39,7 @@ model UserCard {
   userId    Int
   cardId    String
   count     Int     @default(1)
+  level     Int     @default(1)
   isSpecial Boolean @default(false) // holographic/shiny versions
   user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   card      Card    @relation(fields: [cardId], references: [id], onDelete: Cascade)
