@@ -1,0 +1,193 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.welcomeCard {
+  padding: 32px;
+  margin-bottom: 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.welcomeTitle {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.welcomeSubtitle {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.extractorCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
+}
+
+.extractorTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.orbContainer {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  margin-bottom: 32px;
+  cursor: pointer;
+}
+
+.orb {
+  width: 100%;
+  height: 100%;
+  border-radius: 0px;
+  background: var(--bg-surface-opaque);
+  border: 2px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  animation: float 4s ease-in-out infinite, pulseGlow 3s ease-in-out infinite;
+  transition: all 0.25s ease;
+}
+
+.orbContainer::before {
+  content: '✨';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2.5rem;
+  z-index: 5;
+  pointer-events: none;
+  transition: transform 0.25s ease;
+}
+
+.orbContainer:hover::before {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.orbContainer:hover .orb {
+  transform: scale(1.04);
+  border-color: #52525b;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.orbContainer:active .orb {
+  transform: scale(0.98);
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    border-color: var(--border-color);
+  }
+  50% {
+    border-color: #52525b;
+  }
+}
+
+.statsCard {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.statsTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.statRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.statRow:last-child {
+  border-bottom: none;
+}
+
+.statLabel {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.statValue {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.coinsValue {
+  color: var(--rarity-legendary);
+}
+
+.syncContainer {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.syncText {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.syncBtn {
+  width: 100%;
+}
+
+.particle {
+  position: absolute;
+  color: #fbbf24;
+  font-weight: 800;
+  font-size: 1.2rem;
+  pointer-events: none;
+  animation: particleUp 0.8s ease-out forwards;
+  z-index: 10;
+}
+
+@keyframes particleUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-80px) scale(0.8);
+  }
+}

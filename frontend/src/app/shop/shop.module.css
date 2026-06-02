@@ -1,0 +1,235 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.header {
+  margin-bottom: 40px;
+}
+
+.title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 32px;
+  margin-bottom: 40px;
+}
+
+.packCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.packCard:hover {
+  transform: translateY(-5px);
+}
+
+.packGraphic {
+  font-size: 5rem;
+  margin-bottom: 24px;
+  animation: float 5s ease-in-out infinite;
+}
+
+.packName {
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.packInfo {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+
+.packPrice {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--rarity-legendary);
+  margin-bottom: 24px;
+}
+
+.probabilities {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 16px;
+  width: 100%;
+}
+
+.probRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+/* Modal / Pack Opening Overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(4, 5, 12, 0.96);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.packOpener {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.unopenedPack {
+  font-size: 8rem;
+  cursor: pointer;
+  animation: float 3s ease-in-out infinite, pulseGlow 1.5s ease-in-out infinite;
+  transition: transform 0.2s ease;
+}
+
+.unopenedPack:hover {
+  transform: scale(1.1);
+}
+
+.unopenedPack:active {
+  transform: scale(0.95) rotate(-5deg);
+}
+
+.prompt {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-top: 24px;
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Revelación de cartas */
+.revealStage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.revealTitle {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 32px;
+  text-align: center;
+  color: #f3f4f6;
+}
+
+.cardsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.cardContainer {
+  width: 170px;
+  aspect-ratio: 2 / 3;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.flipper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.flipped {
+  transform: rotateY(180deg);
+}
+
+.front,
+.back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 0px;
+}
+
+.front {
+  transform: rotateY(180deg);
+}
+
+.back {
+  background: var(--bg-surface-opaque);
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.backLogo {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.backDecoration {
+  font-size: 1.2rem;
+  opacity: 0.7;
+}
+
+.closeBtn {
+  margin-top: 24px;
+}
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+  min-height: 200px;
+  color: var(--text-secondary);
+}
+
