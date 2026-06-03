@@ -13,7 +13,7 @@ export class GetCollectionUseCase {
     private readonly userCardRepository: IUserCardRepository,
   ) {}
 
-  async execute(userId: number) {
+  async execute(userId: string) {
     const allCards = await this.cardRepository.findAll();
     const userInventory = await this.userCardRepository.findByUser(userId);
 

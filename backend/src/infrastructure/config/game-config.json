@@ -1,0 +1,71 @@
+{
+  "elements": [
+    {
+      "id": "FIRE",
+      "name": "Fuego",
+      "color": "#d11910"
+    },
+    {
+      "id": "WATER",
+      "name": "Agua",
+      "color": "#3878a8"
+    },
+    {
+      "id": "EARTH",
+      "name": "Tierra",
+      "color": "#975b17"
+    },
+    {
+      "id": "AIR",
+      "name": "Aire",
+      "color": "#4fe397"
+    },
+    {
+      "id": "LIGHT",
+      "name": "Luz",
+      "color": "#fff238"
+    },
+    {
+      "id": "SHADOW",
+      "name": "Sombra",
+      "color": "#691eb3"
+    }
+  ],
+  "rarities": [
+    {
+      "id": "COMMON",
+      "name": "Común",
+      "color": "#8e8e93",
+      "weight": 1,
+      "priority": 1
+    },
+    {
+      "id": "RARE",
+      "name": "Raro",
+      "color": "#007aff",
+      "weight": 3,
+      "priority": 3
+    },
+    {
+      "id": "EPIC",
+      "name": "Épico",
+      "color": "#af52de",
+      "weight": 9,
+      "priority": 5
+    },
+    {
+      "id": "LEGENDARY",
+      "name": "Legendario",
+      "color": "#ffcc00",
+      "weight": 27,
+      "priority": 8
+    },
+    {
+      "id": "MYTHIC",
+      "name": "Mítico",
+      "color": "#ff002f",
+      "weight": 81,
+      "priority": 10
+    }
+  ]
+}

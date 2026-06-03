@@ -1,86 +1,278 @@
-.navbar {
+.sidebar {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 32px;
-  border-bottom: 1px solid var(--border-color);
-  background: rgba(6, 8, 20, 0.85);
-  backdrop-filter: blur(12px);
+  flex-direction: column;
+  height: 100vh;
   position: sticky;
   top: 0;
+  align-self: flex-start;
+  width: 240px;
+  min-width: 240px;
+  border-right: 1px solid var(--border-color);
+  background: rgba(6, 6, 8, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 24px 16px;
   z-index: 100;
+  box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+              min-width 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+              padding 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+.collapsed {
+  width: 78px;
+  min-width: 78px;
+  padding: 24px 10px;
+}
+
+.toggleBtn {
+  align-self: flex-end;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+  margin-bottom: 20px;
+  outline: none;
+}
+
+.toggleBtn:hover {
+  color: var(--gold-primary);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.collapsed .toggleBtn {
+  align-self: center;
+}
+
+.brandWrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
   width: 100%;
 }
 
 .brand {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
   cursor: pointer;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  transition: all 0.3s ease;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.collapsed .brand {
+  font-size: 1.3rem;
+  letter-spacing: 0;
 }
 
 .navLinks {
   display: flex;
-  gap: 24px;
+  flex-direction: column;
+  gap: 10px;
+  flex-grow: 1;
 }
 
 .navLink {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-sans);
   color: var(--text-secondary);
   font-weight: 500;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   transition: all 0.2s ease;
-  padding: 8px 12px;
+  padding: 12px 18px;
   border-radius: 0px;
+  border-left: 3px solid transparent;
+  box-sizing: border-box;
 }
 
 .navLink:hover {
-  color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.02);
+  border-left: 3px solid rgba(255, 255, 255, 0.2);
 }
 
 .activeLink {
-  color: #a855f7;
-  background: rgba(139, 92, 246, 0.08);
-  font-weight: 600;
+  color: var(--gold-primary) !important;
+  background: rgba(212, 175, 55, 0.04) !important;
+  border-left: 3px solid var(--gold-primary) !important;
 }
 
-.actions {
+.collapsed .navLink {
+  justify-content: center;
+  padding: 12px 0;
+  border-left: none;
+}
+
+.icon {
+  font-size: 1.15rem;
   display: flex;
   align-items: center;
-  gap: 20px;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.label {
+  white-space: nowrap;
+}
+
+.footerActions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 20px;
 }
 
 .currency {
   display: flex;
   align-items: center;
-  gap: 8px;
-  background: rgba(251, 191, 36, 0.08);
-  border: 1px solid rgba(251, 191, 36, 0.2);
-  padding: 6px 16px;
+  gap: 10px;
+  background: rgba(212, 175, 55, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 8px 18px;
   border-radius: 0px;
-  color: var(--rarity-legendary);
+  color: var(--gold-light);
+  font-family: var(--font-sans);
   font-weight: 700;
-  font-size: 0.95rem;
-  box-shadow: 0 0 10px rgba(251, 191, 36, 0.05);
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  box-sizing: border-box;
+}
+
+.collapsed .currency {
+  padding: 8px 0;
+  justify-content: center;
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
 }
 
 .coinIcon {
   font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.currencyValue {
+  white-space: nowrap;
 }
 
 .logoutBtn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-sans);
   background: transparent;
-  border: 1px solid rgba(239, 68, 68, 0.2);
-  color: #ef4444;
-  padding: 6px 14px;
+  border: none;
+  color: #ff453a;
+  padding: 12px 18px;
   border-radius: 0px;
   cursor: pointer;
-  font-size: 0.875rem;
-  font-weight: 600;
-  transition: all 0.2s ease;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: all 0.25s ease;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .logoutBtn:hover {
-  background: rgba(239, 68, 68, 0.08);
-  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.06);
+  color: #ff453a;
+}
+
+.collapsed .logoutBtn {
+  justify-content: center;
+  padding: 12px 0;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: auto;
+    height: 60px;
+    width: 100% !important;
+    min-width: 100% !important;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 16px !important;
+    border-right: none;
+    border-top: 1px solid var(--border-color);
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .collapsed {
+    width: 100% !important;
+    min-width: 100% !important;
+  }
+
+  .toggleBtn {
+    display: none !important;
+  }
+
+  .brandWrapper {
+    display: none !important;
+  }
+
+  .navLinks {
+    flex-direction: row;
+    gap: 8px;
+    margin-top: 0;
+    flex-grow: 0;
+  }
+
+  .navLink {
+    padding: 8px 12px;
+    font-size: 0.75rem;
+    gap: 6px;
+  }
+
+  .label {
+    display: none !important;
+  }
+
+  .footerActions {
+    flex-direction: row;
+    gap: 12px;
+    margin-top: 0;
+    border-top: none;
+    padding-top: 0;
+    align-items: center;
+  }
+
+  .currency {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+
+  .logoutBtn {
+    padding: 8px 12px;
+    font-size: 0.75rem;
+    gap: 6px;
+    width: auto;
+  }
 }

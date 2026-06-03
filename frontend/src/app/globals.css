@@ -1,39 +1,46 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
 
 :root {
-  /* Color Palette (Sober, Minimalist Matte Dark) */
-  --bg-main: #0a0a0c;
+  /* Color Palette: Luxury Obsidian & Champagne Gold */
+  --bg-main: #060608;
   --bg-body: var(--bg-main);
-  --bg-surface: #121215;
-  --bg-surface-opaque: #16161a;
-  --border-color: #27272a;
+  --bg-surface: rgba(16, 16, 20, 0.85);
+  --bg-surface-opaque: #111115;
+  --border-color: rgba(255, 255, 255, 0.08); /* Minimal soft border */
+  --border-glow: rgba(255, 255, 255, 0.12);
   
-  --text-primary: #fafafa;
-  --text-secondary: #a1a1aa;
-  --text-muted: #52525b;
+  --text-primary: #f5f5f7;
+  --text-secondary: #c5c5cb;
+  --text-muted: #787880;
+  
+  --gold-primary: #d4af37;
+  --gold-light: #f3e5ab;
+  --gold-dark: #aa7c11;
+  --gold-gradient: var(--gold-primary);
 
   /* Rarezas - Tonos Sobrios y Elegantes */
-  --rarity-common: #71717a;
-  --rarity-rare: #3b82f6;
-  --rarity-epic: #a855f7;
-  --rarity-legendary: #fbbf24;
-  --rarity-mythic: #ec4899;
+  --rarity-common: #8e8e93;
+  --rarity-rare: #007aff;
+  --rarity-epic: #af52de;
+  --rarity-legendary: #ffcc00;
+  --rarity-mythic: #ff2d55;
 
   /* Elementos - Colores Sólidos sin Degradados */
-  --element-fire: #ef4444;
-  --element-water: #3b82f6;
-  --element-earth: #10b981;
-  --element-air: #06b6d4;
-  --element-shadow: #6366f1;
-  --element-light: #eab308;
+  --element-fire: #ff3b30;
+  --element-water: #5856d6;
+  --element-earth: #34c759;
+  --element-air: #32ade6;
+  --element-shadow: #1c1c1e;
+  --element-light: #ff9500;
 
-  /* Sombras Sutiles de Hover (sin brillos exagerados) */
-  --glow-common: 0 4px 12px rgba(113, 113, 122, 0.15);
-  --glow-rare: 0 4px 16px rgba(59, 130, 246, 0.2);
-  --glow-epic: 0 4px 20px rgba(168, 85, 247, 0.25);
-  --glow-legendary: 0 4px 24px rgba(251, 191, 36, 0.3);
-  --glow-mythic: 0 4px 28px rgba(236, 72, 153, 0.35);
+  /* Sombras Sutiles de Hover */
+  --glow-common: 0 4px 15px rgba(142, 142, 147, 0.05);
+  --glow-rare: 0 4px 20px rgba(0, 122, 255, 0.08);
+  --glow-epic: 0 4px 25px rgba(175, 82, 222, 0.1);
+  --glow-legendary: 0 4px 30px rgba(255, 204, 0, 0.12);
+  --glow-mythic: 0 4px 35px rgba(255, 45, 85, 0.15);
 
+  --font-display: 'Outfit', sans-serif;
   --font-sans: 'Outfit', sans-serif;
 }
 
@@ -49,6 +56,25 @@ body {
   font-family: var(--font-sans);
   min-height: 100vh;
   overflow-x: hidden;
+  position: relative;
+}
+
+/* Background Atmosphere (Flat Solid) */
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--bg-main);
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* Fine Grid Pattern Disabled for absolute flatness */
+body::after {
+  display: none;
 }
 
 a {
@@ -60,10 +86,16 @@ button {
   font-family: var(--font-sans);
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -71,97 +103,138 @@ button {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--border-color);
-  border-radius: 0px;
+  background: rgba(212, 175, 55, 0.15);
+  border: 2px solid var(--bg-main);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #3f3f46;
+  background: var(--gold-primary);
 }
 
-/* Paneles Minimalistas y Cuadrados */
+/* Paneles Elegantes y Místicos */
 .glass-panel {
   background: var(--bg-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-color);
-  border-radius: 0px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.02);
+  position: relative;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* Inputs de Fantasía */
 .glass-input {
-  background: rgba(10, 10, 12, 0.6);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(10, 10, 12, 0.85);
   border: 1px solid var(--border-color);
-  border-radius: 0px;
   color: var(--text-primary);
   font-family: var(--font-sans);
   font-size: 0.95rem;
-  padding: 12px 16px;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
+  padding: 14px 18px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   width: 100%;
   outline: none;
 }
 
 .glass-input:hover {
-  border-color: #3f3f46;
-  background: rgba(15, 15, 18, 0.8);
+  border-color: rgba(212, 175, 55, 0.3);
+  background: rgba(15, 15, 18, 0.95);
 }
 
 .glass-input:focus {
-  border-color: var(--text-primary);
-  background: rgba(10, 10, 12, 0.9);
+  border-color: var(--gold-primary);
+  background: rgba(10, 10, 12, 0.98);
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.1);
 }
 
-/* Botones Planos, Sobrios y Cuadrados */
+/* Botones Premium con Toque Dorado */
 .btn-primary {
-  background: #fafafa;
-  border: 1px solid #fafafa;
-  border-radius: 0px;
-  color: #09090b;
+  background: var(--gold-primary);
+  border: none;
+  color: #060608;
   cursor: pointer;
+  font-family: var(--font-sans);
   font-size: 0.9rem;
-  font-weight: 600;
-  padding: 10px 20px;
-  transition: all 0.2s ease;
-  box-shadow: none;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 12px 24px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
 }
 
 .btn-primary:hover {
-  background: #e4e4e7;
-  border-color: #e4e4e7;
+  background: var(--gold-light);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
 }
 
 .btn-primary:disabled {
-  background: #27272a;
-  border-color: #27272a;
+  background: #1c1c1e;
+  border: none;
   color: var(--text-muted);
   cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 .btn-secondary {
-  background: transparent;
-  border: 1px solid var(--border-color);
-  border-radius: 0px;
-  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-secondary);
   cursor: pointer;
-  font-size: 0.9rem;
-  font-weight: 500;
-  padding: 10px 20px;
-  transition: all 0.2s ease;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 12px 24px;
+  text-transform: uppercase;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: #52525b;
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #fff;
 }
 
-/* Animaciones Sutiles */
+/* Animations */
 @keyframes float {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
+  50% { transform: translateY(-8px); }
 }
 
 @keyframes holographic-shine {
   0% { background-position: -200% 0%; }
   100% { background-position: 200% 0%; }
+}
+
+/* Sidebar Layout Wrapper */
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+.main-content-wrapper {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .app-layout {
+    flex-direction: column;
+  }
+  .main-content-wrapper {
+    padding-bottom: 70px;
+  }
 }

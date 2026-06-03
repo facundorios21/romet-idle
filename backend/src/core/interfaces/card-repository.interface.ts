@@ -5,6 +5,7 @@ export interface ICardRepository {
   findAll(): Promise<Card[]>;
   findByRarity(rarity: string): Promise<Card[]>;
   save(card: Card): Promise<Card>;
+  delete(id: string): Promise<boolean>;
 }
 
 export const ICardRepositoryToken = Symbol('ICardRepository');

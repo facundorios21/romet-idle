@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { apiRequest, setCookie } from '@/lib/api';
+import { sound } from '@/lib/sound';
 import styles from './login.module.css';
 
 export default function LoginPage() {
@@ -17,6 +18,25 @@ export default function LoginPage() {
     e.preventDefault();
     setError(null);
     setLoading(true);
+    sound.playClick();
+
+    const cleanEmail = email.trim();
+    const cleanPassword = password;
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(cleanEmail)) {
+      sound.playError();
+      setError('El formato de correo electrónico no es válido.');
+      setLoading(false);
+      return;
+    }
+
+    if (cleanPassword.length < 6) {
+      sound.playError();
+      setError('La contraseña debe tener al menos 6 caracteres.');
+      setLoading(false);
+      return;
+    }
 
     try {
       const res = await apiRequest('/auth/login', {
@@ -30,8 +50,10 @@ export default function LoginPage() {
       // Guardar datos básicos del usuario
       localStorage.setItem('user', JSON.stringify(res.user));
 
+      sound.playUpgradeSuccess();
       router.push('/dashboard');
     } catch (err: any) {
+      sound.playError();
       setError(err.message || 'Error al iniciar sesión.');
     } finally {
       setLoading(false);
@@ -82,6 +104,7 @@ export default function LoginPage() {
             className="btn-primary"
             style={{ width: '100%', marginTop: '16px' }}
             disabled={loading}
+            onMouseEnter={() => sound.playHover()}
           >
             {loading ? 'Iniciando Sesión...' : 'Entrar al Reino'}
           </button>
@@ -89,7 +112,12 @@ export default function LoginPage() {
 
         <p className={styles.footer}>
           ¿No tienes una cuenta?{' '}
-          <Link href="/register" className={styles.link}>
+          <Link 
+            href="/register" 
+            className={styles.link}
+            onClick={() => sound.playClick()}
+            onMouseEnter={() => sound.playHover()}
+          >
             Regístrate aquí
           </Link>
         </p>

@@ -1,7 +1,14 @@
 .cardWrapper {
   perspective: 1000px;
   width: 100%;
+}
+
+.wrapperMinimal {
   aspect-ratio: 2 / 3;
+}
+
+.wrapperHorizontal {
+  aspect-ratio: 1.62 / 1;
 }
 
 .card {
@@ -9,19 +16,72 @@
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
-  transition: transform 0.1s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-  border-radius: 0px; /* Quadratic minimalist design */
+  transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+  border-radius: 0px; 
   background: var(--bg-surface-opaque);
-  border: 1px solid var(--border-color);
+  border: 2px solid var(--border-color); /* Thicker luxury border */
   overflow: hidden;
   display: flex;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
+  --sheen-x: 50%;
+  --sheen-y: 50%;
+}
+
+.cardMinimal {
   flex-direction: column;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.cardHorizontal {
+  flex-direction: row;
+}
+
+/* Elegant inner frame border that runs all the way around, inset by 4px */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  right: 4px;
+  bottom: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  pointer-events: none;
+  z-index: 5;
+  transition: border-color 0.3s ease;
+}
+
+/* Gold corner notches inside the inner frame */
+.card::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  right: 6px;
+  bottom: 6px;
+  pointer-events: none;
+  z-index: 5;
+  background: 
+    linear-gradient(to right, rgba(212, 175, 55, 0.3) 2px, transparent 2px) 0 0,
+    linear-gradient(to bottom, rgba(212, 175, 55, 0.3) 2px, transparent 2px) 0 0,
+    linear-gradient(to left, rgba(212, 175, 55, 0.3) 2px, transparent 2px) 100% 0,
+    linear-gradient(to bottom, rgba(212, 175, 55, 0.3) 2px, transparent 2px) 100% 0,
+    linear-gradient(to right, rgba(212, 175, 55, 0.3) 2px, transparent 2px) 0 100%,
+    linear-gradient(to top, rgba(212, 175, 55, 0.3) 2px, transparent 2px) 0 100%,
+    linear-gradient(to left, rgba(212, 175, 55, 0.3) 2px, transparent 2px) 100% 100%,
+    linear-gradient(to top, rgba(212, 175, 55, 0.3) 2px, transparent 2px) 100% 100%;
+  background-size: 8px 8px;
+  background-repeat: no-repeat;
+  transition: opacity 0.3s ease;
 }
 
 .cardWrapper:hover .card {
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
-  border-color: #52525b;
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.9),
+    var(--rarity-glow);
+  border-color: var(--rarity-color, #52525b);
+}
+
+.cardWrapper:hover .card::before {
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
 .cardInner {
@@ -29,20 +89,30 @@
   flex-direction: column;
   width: 100%;
   height: 100%;
-  padding: 14px; /* More breathing room */
+  padding: 16px;
   z-index: 2;
   pointer-events: none;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.015) 0%, transparent 100%);
 }
 
 .locked {
-  filter: grayscale(1) opacity(0.35);
+  filter: grayscale(1) brightness(0.4) contrast(1.2);
+  background: #09090b;
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.locked::before,
+.locked::after {
+  display: none; /* Hide premium accents on locked cards */
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  border-bottom: 1px dashed rgba(212, 175, 55, 0.15);
+  padding-bottom: 6px;
 }
 
 .nameWrapper {
@@ -55,48 +125,57 @@
 .levelBadge {
   font-size: 0.6rem;
   font-weight: 800;
-  background: #27272a;
-  border: 1px solid #52525b;
-  color: var(--text-primary);
-  padding: 1px 4.5px;
+  background: var(--gold-dark);
+  border: 1px solid var(--gold-primary);
+  color: #fff;
+  padding: 2px 5px;
   border-radius: 0px;
   line-height: 1;
   text-transform: uppercase;
   flex-shrink: 0;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.5px;
 }
 
 .name {
+  font-family: var(--font-display);
   font-size: 0.95rem;
-  font-weight: 800;
+  font-weight: 700;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+  letter-spacing: 0.05em;
+  color: #fff;
 }
 
 .power {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  color: var(--gold-light);
   padding: 2px 6px;
   border-radius: 0px;
   font-size: 0.75rem;
   font-weight: 800;
+  letter-spacing: 0.5px;
 }
 
 .imageArea {
   flex-grow: 1;
-  background: rgba(0, 0, 0, 0.3);
+  background: #08080a;
+  border: 1px solid rgba(255, 255, 255, 0.03);
   border-radius: 0px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.8);
 }
 
 .cardImage {
-  font-size: 3rem;
-  transition: transform 0.3s ease;
+  font-size: 3.5rem;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
 }
 
 .cardImageReal {
@@ -104,28 +183,30 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .cardWrapper:hover .cardImage {
-  transform: scale(1.1);
+  transform: scale(1.15) rotate(2deg);
 }
 
 .cardWrapper:hover .cardImageReal {
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
-
 
 .description {
   font-size: 0.75rem;
   color: var(--text-secondary);
-  line-height: 1.25;
-  margin-bottom: 8px;
+  line-height: 1.35;
+  margin-bottom: 10px;
   height: 38px;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+  text-align: center;
+  font-style: italic;
+  font-weight: 300;
 }
 
 .footer {
@@ -133,21 +214,28 @@
   justify-content: space-between;
   align-items: center;
   margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 8px;
 }
 
 .element {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   font-weight: 700;
-  padding: 2px 8px;
+  padding: 3px 8px;
   border-radius: 0px;
   text-transform: uppercase;
-  color: white;
+  color: #fff;
+  letter-spacing: 0.08em;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
 .rarity {
+  font-family: var(--font-display);
   font-size: 0.7rem;
   font-weight: 800;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 /* Counts and Badges */
@@ -162,26 +250,29 @@
 }
 
 .countBadge {
-  background: rgba(139, 92, 246, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: white;
+  background: rgba(16, 16, 20, 0.9);
+  border: 1px solid var(--border-color);
+  color: var(--gold-light);
   font-size: 0.7rem;
   font-weight: 800;
-  padding: 2px 6px;
+  padding: 3px 8px;
   border-radius: 0px;
   text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
 }
 
 .specialBadge {
-  background: #fbbf24;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: #060814;
+  background: var(--gold-primary);
+  border: 1px solid var(--gold-light);
+  color: #0b0b0d;
   font-size: 0.65rem;
-  font-weight: 950;
-  padding: 1px 6px;
+  font-weight: 900;
+  padding: 2px 8px;
   border-radius: 0px;
   text-align: center;
-  box-shadow: none;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 8px rgba(212, 175, 55, 0.2);
+  text-transform: uppercase;
 }
 
 .shinyOverlay {
@@ -190,18 +281,279 @@
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 3;
+  z-index: 7; /* Placed over content layer (z-index 2) */
   pointer-events: none;
-  box-shadow: inset 0 0 0 1px rgba(251, 191, 36, 0.6);
+  mix-blend-mode: color-dodge;
+  opacity: 0.25;
   background: linear-gradient(
-    115deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.05) 40%,
-    rgba(255, 255, 255, 0.12) 50%,
-    rgba(255, 255, 255, 0.05) 60%,
-    rgba(255, 255, 255, 0) 100%
+    135deg,
+    rgba(255, 0, 128, 0.15) 0%,
+    rgba(0, 255, 255, 0.15) 25%,
+    rgba(255, 255, 0, 0.15) 50%,
+    rgba(0, 255, 128, 0.15) 75%,
+    rgba(255, 0, 128, 0.15) 100%
   );
-  background-size: 200% 100%;
-  animation: holographic-shine 4s linear infinite;
-  opacity: 0.9;
+  background-size: 200% 200%;
+  background-position: var(--sheen-x) var(--sheen-y);
+  transition: background-position 0.15s ease, opacity 0.3s ease;
+  box-shadow: inset 0 0 25px rgba(255, 255, 255, 0.1);
+}
+
+.cardWrapper:hover .shinyOverlay {
+  opacity: 0.45;
+}
+
+.cardSheen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 8; /* On top of shiny overlay */
+  pointer-events: none;
+  mix-blend-mode: color-dodge;
+  opacity: 0;
+  background: radial-gradient(
+    circle 200px at var(--sheen-x) var(--sheen-y),
+    rgba(255, 255, 255, 0.22) 0%,
+    rgba(255, 255, 255, 0.05) 45%,
+    transparent 80%
+  );
+  transition: opacity 0.3s ease;
+}
+
+.cardWrapper:hover .cardSheen {
+  opacity: 1;
+}
+
+/* Minimal display mode styles */
+.cardInnerMinimal {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 12px;
+  position: relative;
+  z-index: 2; /* Content sits below reflections */
+}
+
+.imageAreaMinimal {
+  flex-grow: 1;
+  background: #08080a;
+  border: 1px solid rgba(255, 255, 255, 0.08); /* More visible frame border */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.footerMinimal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Horizontal display mode styles */
+.cardInnerHorizontal {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 2; /* Content sits below reflections */
+}
+
+.leftHalf {
+  width: 50%;
+  height: 100%;
+  position: relative;
+  background: #08080a;
+  border-right: 1px solid var(--border-color);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rightHalf {
+  width: 50%;
+  height: 100%;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  background: rgba(16, 16, 20, 0.96);
+  box-sizing: border-box;
+}
+
+.detailsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px dashed rgba(212, 175, 55, 0.2);
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+}
+
+.nameAndLevel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow: hidden;
+}
+
+.descriptionText {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  margin-bottom: 10px;
+  flex-grow: 1;
+  overflow-y: auto;
+  font-style: italic;
+  font-weight: 300;
+  text-align: left;
+}
+
+.detailsFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 8px;
+}
+
+.badgeContainerHorizontal {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  gap: 4px;
+  z-index: 10;
+}
+
+/* --- PRIORITY-BASED ANIMATIONS AND REFLECTIONS --- */
+
+/* Base container modifications for animated reflection sweeps */
+.priorityMedium,
+.priorityHigh,
+.priorityMax {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Automatic diagonal light sweeps for higher priority illustrations */
+.priorityMedium .leftHalf::before,
+.priorityMedium .imageAreaMinimal::before,
+.priorityHigh .leftHalf::before,
+.priorityHigh .imageAreaMinimal::before,
+.priorityMax .leftHalf::before,
+.priorityMax .imageAreaMinimal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+  transform: skewX(-20deg);
+}
+
+.priorityMedium .leftHalf::before,
+.priorityMedium .imageAreaMinimal::before {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
+  animation: autoSweepSheen 7s infinite ease-in-out;
+}
+
+.priorityHigh .leftHalf::before,
+.priorityHigh .imageAreaMinimal::before {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.16),
+    transparent
+  );
+  animation: autoSweepSheen 4.5s infinite ease-in-out;
+}
+
+.priorityMax .leftHalf::before,
+.priorityMax .imageAreaMinimal::before {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.28),
+    rgba(255, 215, 0, 0.12),
+    transparent
+  );
+  animation: autoSweepSheen 2.5s infinite ease-in-out;
+}
+
+@keyframes autoSweepSheen {
+  0% { left: -150%; }
+  35%, 100% { left: 150%; }
+}
+
+/* Low Priority (1-3): Simple static layout, no auto animations */
+.priorityLow .cardImageReal {
+  animation: none;
+}
+
+/* Medium Priority (4-6): Gentle floating effect */
+.priorityMedium .cardImageReal {
+  animation: floatMedium 5s ease-in-out infinite;
+}
+
+@keyframes floatMedium {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-4px) scale(1.02); }
+}
+
+/* High Priority (7-8): Prominent float + rotate and subtle pulse */
+.priorityHigh .cardImageReal {
+  animation: floatHigh 4s ease-in-out infinite;
+}
+
+@keyframes floatHigh {
+  0%, 100% { transform: translateY(0) scale(1) rotate(0deg); }
+  50% { transform: translateY(-6px) scale(1.04) rotate(1deg); }
+}
+
+/* Max Priority (9-10): Extreme floating, dramatic scaling, cosmic drop-shadow aura, and dynamic border glow pulse */
+.priorityMax {
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.15), 0 0 10px var(--rarity-color);
+  animation: mythicContainerGlow 4s ease-in-out infinite alternate;
+}
+
+.priorityMax .cardImageReal {
+  animation: floatMax 3s ease-in-out infinite;
+}
+
+@keyframes floatMax {
+  0%, 100% { 
+    transform: translateY(0) scale(1.02) rotate(0deg); 
+    filter: drop-shadow(0 0 6px var(--rarity-color)) brightness(1); 
+  }
+  50% { 
+    transform: translateY(-8px) scale(1.07) rotate(-1.5deg); 
+    filter: drop-shadow(0 0 16px var(--rarity-color)) brightness(1.2); 
+  }
+}
+
+@keyframes mythicContainerGlow {
+  from { 
+    box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.1), 0 0 8px var(--rarity-color); 
+    border-color: var(--rarity-color);
+  }
+  to { 
+    box-shadow: inset 0 0 25px rgba(255, 255, 255, 0.25), 0 0 22px var(--rarity-color); 
+    border-color: #fff;
+  }
 }

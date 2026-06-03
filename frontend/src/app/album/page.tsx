@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar/Navbar';
 import Card3D from '@/components/Card3D/Card3D';
 import { apiRequest } from '@/lib/api';
 import { useUser } from '@/context/UserContext';
+import { sound } from '@/lib/sound';
 import styles from './album.module.css';
 
 interface Card {
@@ -40,9 +41,10 @@ export default function AlbumPage() {
   const [filterRarity, setFilterRarity] = useState('ALL');
   const [filterElement, setFilterElement] = useState('ALL');
   const [filterOwned, setFilterOwned] = useState('ALL');
+  const [sortBy, setSortBy] = useState('NAME');
 
   // Estados del Crafteo
-  const { user, refreshProfile, deductCoins } = useUser();
+  const { user, refreshProfile, deductCoins, gameConfig } = useUser();
   const [previewShiny, setPreviewShiny] = useState(false);
   const [upgradeLoading, setUpgradeLoading] = useState(false);
   const [upgradeMessage, setUpgradeMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
@@ -65,6 +67,7 @@ export default function AlbumPage() {
   }, []);
 
   const handleInspectCard = (card: Card) => {
+    sound.playClick();
     setInspectedCard(card);
     setPreviewShiny(card.countSpecial > 0);
     setUpgradeMessage(null);
@@ -74,6 +77,7 @@ export default function AlbumPage() {
     if (!inspectedCard) return;
     setUpgradeMessage(null);
     setUpgradeLoading(true);
+    sound.playClick();
 
     try {
       const res = await apiRequest('/collection/upgrade', {
@@ -91,6 +95,7 @@ export default function AlbumPage() {
         type: 'success',
         text: `¡Fusión exitosa! Carta mejorada a Nivel ${res.newLevel}.`,
       });
+      sound.playUpgradeSuccess();
 
       // Actualizar el estado de la carta inspeccionada localmente
       setInspectedCard((prev) => {
@@ -112,6 +117,7 @@ export default function AlbumPage() {
       // Sincronizar el perfil
       await refreshProfile();
     } catch (err: any) {
+      sound.playError();
       setUpgradeMessage({
         type: 'error',
         text: err.message || 'Error al realizar el crafteo.',
@@ -130,6 +136,94 @@ export default function AlbumPage() {
     if (filterOwned === 'UNOWNED') matchOwned = !card.owned;
 
     return matchRarity && matchElement && matchOwned;
+  });
+
+  const getElementName = (el: string) => {
+    if (gameConfig && gameConfig.elements) {
+      const config = gameConfig.elements.find(
+        (item: any) => item.id.toUpperCase() === el.toUpperCase() || item.name.toUpperCase() === el.toUpperCase()
+      );
+      if (config) return config.name;
+    }
+    return el;
+  };
+
+  const getRarityName = (r: string) => {
+    if (gameConfig && gameConfig.rarities) {
+      const config = gameConfig.rarities.find(
+        (item: any) => item.id.toUpperCase() === r.toUpperCase() || item.name.toUpperCase() === r.toUpperCase()
+      );
+      if (config) return config.name;
+    }
+    return r;
+  };
+
+  const getRarityColor = (r: string) => {
+    if (gameConfig && gameConfig.rarities) {
+      const config = gameConfig.rarities.find(
+        (item: any) => item.id.toUpperCase() === r.toUpperCase() || item.name.toUpperCase() === r.toUpperCase()
+      );
+      if (config && config.color) {
+        return config.color;
+      }
+    }
+    switch (r.toUpperCase()) {
+      case 'COMMON': return 'var(--rarity-common)';
+      case 'RARE': return 'var(--rarity-rare)';
+      case 'EPIC': return 'var(--rarity-epic)';
+      case 'LEGENDARY': return 'var(--rarity-legendary)';
+      case 'MYTHIC': return 'var(--rarity-mythic)';
+      default: return '#fff';
+    }
+  };
+
+  const getSetName = (s: string) => {
+    if (gameConfig && gameConfig.sets) {
+      const config = gameConfig.sets.find(
+        (item: any) => item.id.toUpperCase() === s.toUpperCase() || item.name.toUpperCase() === s.toUpperCase()
+      );
+      if (config) return config.name;
+    }
+    return s;
+  };
+
+  const getRarityPriority = (r: string) => {
+    if (gameConfig && gameConfig.rarities) {
+      const config = gameConfig.rarities.find(
+        (item) => item.id.toUpperCase() === r.toUpperCase() || item.name.toUpperCase() === r.toUpperCase()
+      );
+      if (config && typeof config.priority === 'number') {
+        return config.priority;
+      }
+    }
+    switch (r.toUpperCase()) {
+      case 'COMMON': return 1;
+      case 'RARE': return 3;
+      case 'EPIC': return 5;
+      case 'LEGENDARY': return 8;
+      case 'MYTHIC': return 10;
+      default: return 1;
+    }
+  };
+
+  const sortedCards = [...filteredCards].sort((a, b) => {
+    if (sortBy === 'POWER_DESC') {
+      const powerA = Math.round(a.power * (a.countSpecial > 0 ? 1.2 : 1.0) * (1 + ((a.countSpecial > 0 ? a.levelSpecial : a.levelNormal) - 1) * 0.15));
+      const powerB = Math.round(b.power * (b.countSpecial > 0 ? 1.2 : 1.0) * (1 + ((b.countSpecial > 0 ? b.levelSpecial : b.levelNormal) - 1) * 0.15));
+      return powerB - powerA;
+    }
+    if (sortBy === 'POWER_ASC') {
+      const powerA = Math.round(a.power * (a.countSpecial > 0 ? 1.2 : 1.0) * (1 + ((a.countSpecial > 0 ? a.levelSpecial : a.levelNormal) - 1) * 0.15));
+      const powerB = Math.round(b.power * (b.countSpecial > 0 ? 1.2 : 1.0) * (1 + ((b.countSpecial > 0 ? b.levelSpecial : b.levelNormal) - 1) * 0.15));
+      return powerA - powerB;
+    }
+    if (sortBy === 'RARITY_DESC') {
+      return getRarityPriority(b.rarity) - getRarityPriority(a.rarity);
+    }
+    if (sortBy === 'RARITY_ASC') {
+      return getRarityPriority(a.rarity) - getRarityPriority(b.rarity);
+    }
+    return a.name.localeCompare(b.name);
   });
 
   // Cálculo de poder y costos para previsualización
@@ -158,13 +252,14 @@ export default function AlbumPage() {
     : 0;
 
   return (
-    <>
+    <div className="app-layout">
       <Navbar />
-      <main className={styles.container}>
-        <div className={styles.header}>
-          <h1 className={styles.title}>Álbum de Cartas</h1>
-          <p className={styles.subtitle}>Gestiona tu colección de criaturas míticas y mejóralas.</p>
-        </div>
+      <div className="main-content-wrapper">
+        <main className={styles.container}>
+          <div className={styles.header}>
+            <h1 className={styles.title}>Álbum de Cartas</h1>
+            <p className={styles.subtitle}>Gestiona tu colección de criaturas míticas y mejóralas.</p>
+          </div>
 
         {error && (
           <div style={{ color: '#ef4444', textAlign: 'center', marginBottom: '24px' }}>
@@ -209,14 +304,12 @@ export default function AlbumPage() {
                   <select
                     className={styles.select}
                     value={filterRarity}
-                    onChange={(e) => setFilterRarity(e.target.value)}
+                    onChange={(e) => { sound.playClick(); setFilterRarity(e.target.value); }}
                   >
                     <option value="ALL">Todas las rarezas</option>
-                    <option value="COMMON">Común</option>
-                    <option value="RARE">Raro</option>
-                    <option value="EPIC">Épico</option>
-                    <option value="LEGENDARY">Legendario</option>
-                    <option value="MYTHIC">Mítico</option>
+                    {gameConfig?.rarities?.map((r: any) => (
+                      <option key={r.id} value={r.id}>{r.name}</option>
+                    ))}
                   </select>
                 </div>
 
@@ -226,15 +319,12 @@ export default function AlbumPage() {
                   <select
                     className={styles.select}
                     value={filterElement}
-                    onChange={(e) => setFilterElement(e.target.value)}
+                    onChange={(e) => { sound.playClick(); setFilterElement(e.target.value); }}
                   >
                     <option value="ALL">Todos los elementos</option>
-                    <option value="FIRE">Fuego 🔥</option>
-                    <option value="WATER">Agua 💧</option>
-                    <option value="EARTH">Tierra 🗿</option>
-                    <option value="AIR">Viento 🌀</option>
-                    <option value="LIGHT">Luz 👑</option>
-                    <option value="SHADOW">Sombra 🌑</option>
+                    {gameConfig?.elements?.map((el: any) => (
+                      <option key={el.id} value={el.id}>{el.name}</option>
+                    ))}
                   </select>
                 </div>
 
@@ -244,20 +334,36 @@ export default function AlbumPage() {
                   <select
                     className={styles.select}
                     value={filterOwned}
-                    onChange={(e) => setFilterOwned(e.target.value)}
+                    onChange={(e) => { sound.playClick(); setFilterOwned(e.target.value); }}
                   >
                     <option value="ALL">Ver todo</option>
                     <option value="OWNED">Obtenidas</option>
                     <option value="UNOWNED">No obtenidas</option>
                   </select>
                 </div>
+
+                {/* ORDENACIÓN */}
+                <div className={styles.filterGroup}>
+                  <label className={styles.filterLabel}>Ordenar por</label>
+                  <select
+                    className={styles.select}
+                    value={sortBy}
+                    onChange={(e) => { sound.playClick(); setSortBy(e.target.value); }}
+                  >
+                    <option value="NAME">Nombre (A-Z)</option>
+                    <option value="POWER_DESC">Poder (Mayor a Menor)</option>
+                    <option value="POWER_ASC">Poder (Menor a Mayor)</option>
+                    <option value="RARITY_DESC">Rareza (Mayor Prioridad)</option>
+                    <option value="RARITY_ASC">Rareza (Menor Prioridad)</option>
+                  </select>
+                </div>
               </div>
             </div>
 
             {/* Grid de Cartas */}
-            {filteredCards.length > 0 ? (
+            {sortedCards.length > 0 ? (
               <div className={styles.grid}>
-                {filteredCards.map((card) => (
+                {sortedCards.map((card) => (
                   <div
                     key={card.id}
                     onClick={() => handleInspectCard(card)}
@@ -275,6 +381,7 @@ export default function AlbumPage() {
                       countNormal={card.countNormal}
                       countSpecial={card.countSpecial}
                       level={card.countSpecial > 0 ? card.levelSpecial : card.levelNormal}
+                      minimal={true}
                     />
                   </div>
                 ))}
@@ -289,7 +396,7 @@ export default function AlbumPage() {
 
         {/* Modal de Inspección */}
         {inspectedCard && (
-          <div className={styles.modalOverlay} onClick={() => setInspectedCard(null)}>
+          <div className={styles.modalOverlay} onClick={() => { sound.playClick(); setInspectedCard(null); }}>
             <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
               <div className={styles.cardPreview}>
                 <Card3D
@@ -305,6 +412,8 @@ export default function AlbumPage() {
                   countSpecial={previewShiny ? inspectedCard.countSpecial : 0}
                   isSpecial={previewShiny}
                   level={previewShiny ? inspectedCard.levelSpecial : inspectedCard.levelNormal}
+                  minimal={true}
+                  illustrationOnly={true}
                 />
               </div>
 
@@ -313,18 +422,21 @@ export default function AlbumPage() {
                   <div className={styles.modalHeader}>
                     <h2 className={styles.modalTitle}>{inspectedCard.name}</h2>
                     <div className={styles.modalSubtitle}>
-                      <span
-                        style={{
-                          color: `var(--rarity-${inspectedCard.rarity.toLowerCase()})`,
-                        }}
-                      >
-                        {inspectedCard.rarity}
+                      <span style={{ color: getRarityColor(inspectedCard.rarity), fontWeight: 800 }}>
+                        {getRarityName(inspectedCard.rarity)}
                       </span>
                       <span style={{ color: 'var(--text-muted)' }}>•</span>
-                      <span>{inspectedCard.element}</span>
+                      <span style={{ color: '#fff', fontWeight: 600 }}>{getElementName(inspectedCard.element)}</span>
                       <span style={{ color: 'var(--text-muted)' }}>•</span>
-                      <span>⚔️ {currentPower} PODER</span>
+                      <span style={{ color: 'var(--gold-primary)', fontWeight: 800 }}>Poder: {currentPower}</span>
+                      <span style={{ color: 'var(--text-muted)' }}>•</span>
+                      <span style={{ color: 'var(--gold-light)', fontWeight: 800 }}>Nivel: {currentLevel}</span>
                     </div>
+                  </div>
+
+                  <div className={styles.modalInfoSection}>
+                    <h4 className={styles.modalInfoTitle}>Descripción</h4>
+                    <p className={styles.modalDescription}>{inspectedCard.description}</p>
                   </div>
 
                   {/* Selector de versión */}
@@ -333,32 +445,31 @@ export default function AlbumPage() {
                       <button
                         className={`${styles.versionTab} ${!previewShiny ? styles.versionTabActive : ''}`}
                         onClick={() => {
+                          sound.playClick();
                           setPreviewShiny(false);
                           setUpgradeMessage(null);
                         }}
+                        onMouseEnter={() => sound.playHover()}
                       >
-                        Normal (Lvl.{inspectedCard.levelNormal})
+                        Normal (Nivel {inspectedCard.levelNormal})
                       </button>
                       <button
                         className={`${styles.versionTab} ${previewShiny ? styles.versionTabActive : ''}`}
                         onClick={() => {
+                          sound.playClick();
                           setPreviewShiny(true);
                           setUpgradeMessage(null);
                         }}
+                        onMouseEnter={() => sound.playHover()}
                         disabled={inspectedCard.countSpecial === 0 && inspectedCard.levelSpecial === 1}
                         style={{
                           opacity: inspectedCard.countSpecial === 0 && inspectedCard.levelSpecial === 1 ? 0.4 : 1,
                         }}
                       >
-                        Shiny (Lvl.{inspectedCard.levelSpecial})
+                        Shiny (Nivel {inspectedCard.levelSpecial})
                       </button>
                     </div>
                   )}
-
-                  <div className={styles.modalInfoSection}>
-                    <h4 className={styles.modalInfoTitle}>Descripción</h4>
-                    <p className={styles.modalDescription}>{inspectedCard.description}</p>
-                  </div>
 
                   {/* Panel de Crafteo / Mejora */}
                   {inspectedCard.owned && (
@@ -375,13 +486,13 @@ export default function AlbumPage() {
                         <div className={styles.statBox}>
                           <span className={styles.statLabel}>Nivel</span>
                           <span className={styles.statValue}>
-                            {currentLevel} <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>➔ {nextLevel}</span>
+                            {currentLevel} <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>{"\u2192"} {nextLevel}</span>
                           </span>
                         </div>
                         <div className={styles.statBox}>
                           <span className={styles.statLabel}>Poder de Ataque</span>
                           <span className={styles.statValue} style={{ color: '#ec4899' }}>
-                            ⚔️ {currentPower} <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>➔ {nextPower}</span>
+                            Poder: {currentPower} <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>{"\u2192"} {nextPower}</span>
                           </span>
                         </div>
                       </div>
@@ -404,6 +515,7 @@ export default function AlbumPage() {
                       <button
                         className={styles.upgradeBtn}
                         onClick={handleUpgrade}
+                        onMouseEnter={() => sound.playHover()}
                         disabled={
                           upgradeLoading ||
                           currentCount < duplicatesNeeded ||
@@ -420,14 +532,18 @@ export default function AlbumPage() {
                     <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
                       Set:{' '}
                       <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>
-                        {inspectedCard.set}
+                        {getSetName(inspectedCard.set)}
                       </span>
                     </p>
                   </div>
                 </div>
 
                 <div className={styles.modalActions}>
-                  <button onClick={() => setInspectedCard(null)} className="btn-primary">
+                  <button 
+                    onClick={() => { sound.playClick(); setInspectedCard(null); }} 
+                    className="btn-primary"
+                    onMouseEnter={() => sound.playHover()}
+                  >
                     Cerrar
                   </button>
                 </div>
@@ -436,6 +552,7 @@ export default function AlbumPage() {
           </div>
         )}
       </main>
-    </>
+    </div>
+  </div>
   );
 }

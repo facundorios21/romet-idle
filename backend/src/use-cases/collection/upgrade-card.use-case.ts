@@ -13,7 +13,7 @@ export class UpgradeCardUseCase {
     private readonly userCardRepository: IUserCardRepository,
   ) {}
 
-  async execute(userId: number, cardId: string, isSpecial: boolean) {
+  async execute(userId: string, cardId: string, isSpecial: boolean) {
     // 1. Obtener la carta del inventario del usuario
     const userCard = await this.userCardRepository.findByUserCardAndSpecial(userId, cardId, isSpecial);
     if (!userCard) {

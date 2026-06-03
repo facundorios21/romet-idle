@@ -9,7 +9,7 @@ export class GetProfileUseCase {
     private readonly userRepository: IUserRepository,
   ) {}
 
-  async execute(userId: number) {
+  async execute(userId: string) {
     const user = await this.userRepository.findById(userId);
     if (!user) {
       throw new NotFoundException('Usuario no encontrado.');

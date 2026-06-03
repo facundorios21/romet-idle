@@ -2,9 +2,10 @@ import { Injectable, Inject } from '@nestjs/common';
 import { ICardRepositoryToken } from '../../core/interfaces/card-repository.interface';
 import type { ICardRepository } from '../../core/interfaces/card-repository.interface';
 import { Card } from '../../core/entities/card.entity';
+import { randomUUID } from 'crypto';
 
 export interface CreateCardDto {
-  id: string;
+  id?: string;
   name: string;
   description: string;
   imageUrl: string;
@@ -22,8 +23,9 @@ export class CreateCardUseCase {
   ) {}
 
   async execute(dto: CreateCardDto): Promise<Card> {
+    const cardId = dto.id || randomUUID();
     const card = new Card(
-      dto.id,
+      cardId,
       dto.name,
       dto.description,
       dto.imageUrl,

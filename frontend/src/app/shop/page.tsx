@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar/Navbar';
 import Card3D from '@/components/Card3D/Card3D';
 import { useUser } from '@/context/UserContext';
 import { apiRequest } from '@/lib/api';
+import { sound } from '@/lib/sound';
 import styles from './shop.module.css';
 
 interface RollCard {
@@ -61,13 +62,16 @@ export default function ShopPage() {
     fetchPacks();
   }, []);
 
-  const getPackGraphic = (id: string) => {
-    const graphics: Record<string, string> = {
-      basic: '🟤',
-      standard: '⚪',
-      legendary: '🟡',
-    };
-    return graphics[id] || '🎁';
+  const getPackGraphic = (pack: Pack) => {
+    const cost = pack.cost;
+    const color = cost <= 100 ? '#b45309' : cost <= 250 ? '#94a3b8' : cost <= 600 ? '#eab308' : '#ec4899';
+    return (
+      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ filter: `drop-shadow(0 0 10px ${color}33)` }}>
+        <path d="M12 2L2 7l10 5 10-5-10-5z" />
+        <path d="M2 17l10 5 10-5" />
+        <path d="M2 12l10 5 10-5" />
+      </svg>
+    );
   };
 
   const getPackProbs = (pack: Pack) => {
@@ -82,10 +86,12 @@ export default function ShopPage() {
 
   const handleBuyPack = async (pack: Pack) => {
     if (coins < pack.cost) {
+      sound.playError();
       alert('Esencias insuficientes para comprar este sobre.');
       return;
     }
 
+    sound.playClick();
     setLoading(true);
     setError(null);
     setOpeningPack(pack.name);
@@ -106,6 +112,7 @@ export default function ShopPage() {
 
       setRolledCards(res.cards);
     } catch (err: any) {
+      sound.playError();
       setError(err.message || 'Error al comprar el sobre.');
       // Revertir descuento si falla (sincronizando con base de datos)
       claimIdleCoins();
@@ -118,6 +125,7 @@ export default function ShopPage() {
   const handleUnwrapPack = () => {
     if (isUnwrapping) return;
     setIsUnwrapping(true);
+    sound.playPackUnwrap();
     setTimeout(() => {
       setIsPackUnwrapped(true);
       setIsUnwrapping(false);
@@ -129,10 +137,27 @@ export default function ShopPage() {
   };
 
   const handleCardReveal = (index: number) => {
+    if (!revealedCards[index]) {
+      sound.playCardFlip();
+    }
     setRevealedCards((prev) => ({ ...prev, [index]: true }));
   };
 
+  const handleRevealAll = () => {
+    rolledCards.forEach((_, index) => {
+      setTimeout(() => {
+        setRevealedCards((prev) => {
+          if (!prev[index]) {
+            sound.playCardFlip();
+          }
+          return { ...prev, [index]: true };
+        });
+      }, index * 250);
+    });
+  };
+
   const handleCloseOverlay = () => {
+    sound.playClick();
     setOpeningPack(null);
     setRolledCards([]);
     setRevealedCards({});
@@ -144,15 +169,16 @@ export default function ShopPage() {
   };
 
   return (
-    <>
+    <div className="app-layout">
       <Navbar />
-      <main className={styles.container}>
-        <div className={styles.header}>
-          <h1 className={styles.title}>Tienda de Sobres</h1>
-          <p className={styles.subtitle}>
-            Gasta tus esencias de Aether para invocar nuevos y poderosos aliados.
-          </p>
-        </div>
+      <div className="main-content-wrapper">
+        <main className={styles.container}>
+          <div className={styles.header}>
+            <h1 className={styles.title}>Tienda de Sobres</h1>
+            <p className={styles.subtitle}>
+              Gasta tus esencias de Aether para invocar nuevos y poderosos aliados.
+            </p>
+          </div>
 
         {loadingPacks ? (
           <div className={styles.loadingContainer}>Cargando sobres...</div>
@@ -160,16 +186,17 @@ export default function ShopPage() {
           <div className={styles.grid}>
             {packs.map((pack) => (
               <div key={pack.id} className={`${styles.packCard} glass-panel`}>
-                <span className={styles.packGraphic}>{getPackGraphic(pack.id)}</span>
+                <span className={styles.packGraphic}>{getPackGraphic(pack)}</span>
                 <h2 className={styles.packName}>{pack.name}</h2>
                 <p className={styles.packInfo}>Contiene {pack.cardsCount} cartas místicas</p>
-                <div className={styles.packPrice}>✨ {pack.cost} Esencias</div>
+                <div className={styles.packPrice}>✦ {pack.cost} Esencias</div>
 
                 <button
                   onClick={() => handleBuyPack(pack)}
                   className="btn-primary"
                   style={{ width: '100%', marginBottom: '24px' }}
                   disabled={loading || coins < pack.cost}
+                  onMouseEnter={() => sound.playHover()}
                 >
                   Comprar Sobre
                 </button>
@@ -192,78 +219,105 @@ export default function ShopPage() {
         {/* Modal / Pack Opening Stage */}
         {openingPack && (
           <div className={styles.overlay}>
-            {error && (
-              <div style={{ textAlign: 'center' }}>
-                <p style={{ color: '#ef4444', marginBottom: '16px' }}>{error}</p>
-                <button onClick={handleCloseOverlay} className="btn-secondary">
-                  Cerrar
-                </button>
-              </div>
-            )}
-
-            {!error && !isPackUnwrapped && (
-              <div className={styles.packOpener}>
-                {isUnwrapping && <div className={styles.glowingRays} />}
-                <div
-                  className={`${styles.unopenedPack} ${isUnwrapping ? styles.packUnwrapping : ''}`}
-                  onClick={handleUnwrapPack}
-                >
-                  🎁
+            <div className={styles.overlayInner}>
+              {error && (
+                <div style={{ textAlign: 'center' }}>
+                  <p style={{ color: '#ef4444', marginBottom: '16px' }}>{error}</p>
+                  <button onClick={handleCloseOverlay} className="btn-secondary">
+                    Cerrar
+                  </button>
                 </div>
-                <p className={styles.prompt}>
-                  {isUnwrapping ? '¡La energía mística se acumula!' : '¡Haz clic sobre el sobre para abrirlo!'}
-                </p>
-              </div>
-            )}
+              )}
 
-            {!error && isPackUnwrapped && rolledCards.length > 0 && (
-              <div className={styles.revealStage}>
-                <h2 className={styles.revealTitle}>Apertura de: {openingPack}</h2>
-                <div className={styles.cardsGrid}>
-                  {rolledCards.map((roll, index) => (
-                    <div
-                      key={index}
-                      className={styles.cardContainer}
-                      onMouseEnter={() => handleCardReveal(index)}
-                      onClick={() => handleCardReveal(index)}
+              {!error && !isPackUnwrapped && (
+                <div className={styles.packOpener}>
+                  {isUnwrapping && <div className={styles.glowingRays} />}
+                  <div
+                    className={`${styles.unopenedPack} ${isUnwrapping ? styles.packUnwrapping : ''}`}
+                    onClick={handleUnwrapPack}
+                  >
+                    <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="var(--gold-primary)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" style={{ filter: 'drop-shadow(0 0 20px rgba(212, 175, 55, 0.4))' }}>
+                      <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                      <path d="M2 17l10 5 10-5" />
+                      <path d="M2 12l10 5 10-5" />
+                    </svg>
+                  </div>
+                  <p className={styles.prompt}>
+                    {isUnwrapping ? '¡La energía mística se acumula!' : '¡Haz clic sobre el sobre para abrirlo!'}
+                  </p>
+                </div>
+              )}
+
+              {!error && isPackUnwrapped && rolledCards.length > 0 && (
+                <div className={styles.revealStage}>
+                  <h2 className={styles.revealTitle}>Apertura de: {openingPack}</h2>
+                  
+                  {Object.keys(revealedCards).length < rolledCards.length && (
+                    <button
+                      onClick={handleRevealAll}
+                      className="btn-secondary"
+                      style={{ marginBottom: '24px' }}
+                      onMouseEnter={() => sound.playHover()}
                     >
+                      Revelar todas las cartas
+                    </button>
+                  )}
+
+                  <div className={styles.cardsGrid}>
+                    {rolledCards.map((roll, index) => (
                       <div
-                        className={`${styles.flipper} ${revealedCards[index] ? styles.flipped : ''}`}
+                        key={index}
+                        className={styles.cardContainer}
+                        onMouseEnter={() => handleCardReveal(index)}
+                        onClick={() => handleCardReveal(index)}
                       >
-                        <div className={styles.front}>
-                          <Card3D
-                            id={roll.card.id}
-                            name={roll.card.name}
-                            description={roll.card.description}
-                            rarity={roll.card.rarity}
-                            power={roll.card.power}
-                            element={roll.card.element}
-                            imageUrl={roll.card.imageUrl}
-                            isSpecial={roll.isSpecial}
-                            owned={true}
-                          />
-                        </div>
-                        <div className={styles.back}>
-                          <div className={styles.backLogo}>⭐</div>
-                          <div className={styles.backDecoration}>AETHERIA</div>
+                        <div
+                          className={`${styles.flipper} ${revealedCards[index] ? styles.flipped : ''}`}
+                        >
+                          <div className={styles.front}>
+                            <Card3D
+                              id={roll.card.id}
+                              name={roll.card.name}
+                              description={roll.card.description}
+                              rarity={roll.card.rarity}
+                              power={roll.card.power}
+                              element={roll.card.element}
+                              imageUrl={roll.card.imageUrl}
+                              isSpecial={roll.isSpecial}
+                              owned={true}
+                            />
+                          </div>
+                          <div className={styles.back}>
+                            <div className={styles.backLogo}>
+                              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--gold-primary)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                              </svg>
+                            </div>
+                            <div className={styles.backDecoration}>AETHERIA</div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
+    
+                  {/* Mostrar botón cerrar solo si el usuario reveló todas las cartas */}
+                  {Object.keys(revealedCards).length === rolledCards.length && (
+                    <button 
+                      onClick={handleCloseOverlay} 
+                      className="btn-primary styles.closeBtn"
+                      onMouseEnter={() => sound.playHover()}
+                    >
+                      Confirmar y Regresar a la Tienda
+                    </button>
+                  )}
                 </div>
-
-                {/* Mostrar botón cerrar solo si el usuario reveló todas las cartas */}
-                {Object.keys(revealedCards).length === rolledCards.length && (
-                  <button onClick={handleCloseOverlay} className="btn-primary styles.closeBtn">
-                    Confirmar y Regresar a la Tienda
-                  </button>
-                )}
-              </div>
-            )}
+              )}
+            </div>
           </div>
         )}
         {showFlash && <div className={styles.flashOverlay} />}
       </main>
-    </>
+    </div>
+  </div>
   );
 }

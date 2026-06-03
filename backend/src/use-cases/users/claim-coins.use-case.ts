@@ -12,7 +12,7 @@ export class ClaimCoinsUseCase {
     private readonly userRepository: IUserRepository,
   ) {}
 
-  async execute(userId: number, clicks = 0) {
+  async execute(userId: string, clicks = 0) {
     const user = await this.userRepository.findById(userId);
     if (!user) {
       throw new NotFoundException('Usuario no encontrado.');

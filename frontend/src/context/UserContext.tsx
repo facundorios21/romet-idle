@@ -5,7 +5,7 @@ import { useRouter, usePathname } from 'next/navigation';
 import { apiRequest, deleteCookie, getCookie } from '@/lib/api';
 
 interface User {
-  id: number;
+  id: string;
   username: string;
   email: string;
   coins: number;
@@ -14,15 +14,42 @@ interface User {
 }
 
 
+interface ElementConfig {
+  id: string;
+  name: string;
+  color: string;
+}
+
+interface RarityConfig {
+  id: string;
+  name: string;
+  color: string;
+  weight: number;
+  priority?: number;
+}
+
+interface SetConfig {
+  id: string;
+  name: string;
+}
+
+interface GameConfig {
+  elements: ElementConfig[];
+  rarities: RarityConfig[];
+  sets: SetConfig[];
+}
+
 interface UserContextProps {
   user: User | null;
   coins: number;
   loading: boolean;
+  gameConfig: GameConfig | null;
   logout: () => void;
   refreshProfile: () => Promise<void>;
   claimIdleCoins: () => Promise<void>;
   deductCoins: (amount: number) => void;
   addCoinsLocally: (amount: number) => void;
+  refreshGameConfig: () => Promise<void>;
 }
 
 const UserContext = createContext<UserContextProps | undefined>(undefined);
@@ -34,6 +61,20 @@ export function UserProvider({ children }: { children: ReactNode }) {
   const [coins, setCoins] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
   const [pendingClicks, setPendingClicks] = useState<number>(0);
+  const [gameConfig, setGameConfig] = useState<GameConfig | null>(null);
+
+  const refreshGameConfig = async () => {
+    try {
+      const data = await apiRequest('/collection/game-config');
+      setGameConfig(data);
+    } catch (err) {
+      console.error('Error fetching game config in provider:', err);
+    }
+  };
+
+  useEffect(() => {
+    refreshGameConfig();
+  }, []);
 
   // Generación pasiva: 10 monedas por minuto (0.166667 por segundo)
   const COINS_PER_SECOND = 0.166667;
@@ -51,6 +92,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
       const data = await apiRequest('/users/profile');
       setUser(data);
       setCoins(data.coins);
+      await refreshGameConfig();
     } catch (err) {
       console.error('Error fetching profile:', err);
       logout();
@@ -145,11 +187,13 @@ export function UserProvider({ children }: { children: ReactNode }) {
         user,
         coins,
         loading,
+        gameConfig,
         logout,
         refreshProfile,
         claimIdleCoins,
         deductCoins,
         addCoinsLocally,
+        refreshGameConfig,
       }}
     >
       {children}

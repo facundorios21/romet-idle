@@ -1,32 +1,38 @@
 import { Module } from '@nestjs/common';
-import { PrismaModule } from '../prisma/prisma.module';
-import { PrismaUserRepository } from './prisma-user.repository';
-import { PrismaCardRepository } from './prisma-card.repository';
-import { PrismaUserCardRepository } from './prisma-user-card.repository';
-import { PrismaPackRepository } from './prisma-pack.repository';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserEntity } from '../typeorm/entities/user.entity';
+import { CardEntity } from '../typeorm/entities/card.entity';
+import { UserCardEntity } from '../typeorm/entities/user-card.entity';
+import { PackEntity } from '../typeorm/entities/pack.entity';
+import { TypeOrmUserRepository } from './typeorm-user.repository';
+import { TypeOrmCardRepository } from './typeorm-card.repository';
+import { TypeOrmUserCardRepository } from './typeorm-user-card.repository';
+import { TypeOrmPackRepository } from './typeorm-pack.repository';
 import { IUserRepositoryToken } from '../../core/interfaces/user-repository.interface';
 import { ICardRepositoryToken } from '../../core/interfaces/card-repository.interface';
 import { IUserCardRepositoryToken } from '../../core/interfaces/user-card-repository.interface';
 import { IPackRepositoryToken } from '../../core/interfaces/pack-repository.interface';
 
 @Module({
-  imports: [PrismaModule],
+  imports: [
+    TypeOrmModule.forFeature([UserEntity, CardEntity, UserCardEntity, PackEntity]),
+  ],
   providers: [
     {
       provide: IUserRepositoryToken,
-      useClass: PrismaUserRepository,
+      useClass: TypeOrmUserRepository,
     },
     {
       provide: ICardRepositoryToken,
-      useClass: PrismaCardRepository,
+      useClass: TypeOrmCardRepository,
     },
     {
       provide: IUserCardRepositoryToken,
-      useClass: PrismaUserCardRepository,
+      useClass: TypeOrmUserCardRepository,
     },
     {
       provide: IPackRepositoryToken,
-      useClass: PrismaPackRepository,
+      useClass: TypeOrmPackRepository,
     },
   ],
   exports: [
@@ -37,4 +43,5 @@ import { IPackRepositoryToken } from '../../core/interfaces/pack-repository.inte
   ],
 })
 export class RepositoriesModule {}
+
 

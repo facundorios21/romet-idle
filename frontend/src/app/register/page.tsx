@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { apiRequest, setCookie } from '@/lib/api';
+import { sound } from '@/lib/sound';
 import styles from './register.module.css';
 
 export default function RegisterPage() {
@@ -18,6 +19,33 @@ export default function RegisterPage() {
     e.preventDefault();
     setError(null);
     setLoading(true);
+    sound.playClick();
+
+    const cleanUsername = username.trim();
+    const cleanEmail = email.trim();
+    const cleanPassword = password; // Preserve spaces in passwords if user wants, but check length
+
+    if (cleanUsername.length < 3) {
+      sound.playError();
+      setError('El nombre de usuario debe tener al menos 3 caracteres.');
+      setLoading(false);
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(cleanEmail)) {
+      sound.playError();
+      setError('El formato de correo electrónico no es válido.');
+      setLoading(false);
+      return;
+    }
+
+    if (cleanPassword.length < 6) {
+      sound.playError();
+      setError('La contraseña debe tener al menos 6 caracteres.');
+      setLoading(false);
+      return;
+    }
 
     try {
       // 1. Registrar usuario
@@ -36,8 +64,10 @@ export default function RegisterPage() {
       setCookie('token', res.accessToken, 1);
       localStorage.setItem('user', JSON.stringify(res.user));
 
+      sound.playUpgradeSuccess();
       router.push('/dashboard');
     } catch (err: any) {
+      sound.playError();
       setError(err.message || 'Error al registrarse.');
     } finally {
       setLoading(false);
@@ -103,6 +133,7 @@ export default function RegisterPage() {
             className="btn-primary"
             style={{ width: '100%', marginTop: '16px' }}
             disabled={loading}
+            onMouseEnter={() => sound.playHover()}
           >
             {loading ? 'Creando Cuenta...' : 'Registrarse'}
           </button>
@@ -110,7 +141,12 @@ export default function RegisterPage() {
 
         <p className={styles.footer}>
           ¿Ya tienes una cuenta?{' '}
-          <Link href="/login" className={styles.link}>
+          <Link 
+            href="/login" 
+            className={styles.link}
+            onClick={() => sound.playClick()}
+            onMouseEnter={() => sound.playHover()}
+          >
             Inicia sesión aquí
           </Link>
         </p>

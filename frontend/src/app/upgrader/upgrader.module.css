@@ -1,0 +1,438 @@
+.container {
+  max-width: 1600px;
+  width: 95%;
+  margin: 0 auto;
+  padding: 40px 24px;
+  animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.header {
+  margin-bottom: 30px;
+  text-align: left;
+  border-left: 2px solid var(--gold-primary);
+  padding-left: 20px;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 2.3rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: var(--gold-primary);
+  letter-spacing: 0.05em;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  font-weight: 300;
+}
+
+.mainGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr 1fr;
+  gap: 30px;
+  width: 100%;
+}
+
+@media (max-width: 1200px) {
+  .mainGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.panel {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  min-height: 500px;
+  box-sizing: border-box;
+}
+
+.centerPanel {
+  background: rgba(10, 10, 14, 0.9);
+  border: 1px solid var(--border-color);
+}
+
+.panelTitle {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  margin-bottom: 8px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+  padding-bottom: 8px;
+}
+
+.helpText {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+.loadingText,
+.emptyText {
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  padding: 40px 10px;
+  font-style: italic;
+}
+
+/* Candidate selection grid */
+.candidateGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 16px;
+  overflow-y: auto;
+  max-height: 600px;
+  padding-right: 4px;
+}
+
+.candidateCard {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  text-align: center;
+}
+
+.cardPreviewMini {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  margin-bottom: 8px;
+}
+
+.candidateActions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.candidateName {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  color: #fff;
+}
+
+.addBtn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  font-size: 0.7rem;
+  padding: 6px;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.2s ease;
+  font-weight: 600;
+}
+
+.addBtn:hover:not(:disabled) {
+  background: rgba(212, 175, 55, 0.15);
+  border-color: var(--gold-primary);
+  color: #fff;
+}
+
+.addShinyBtn {
+  border-color: rgba(212, 175, 55, 0.3);
+  color: var(--gold-light);
+}
+
+.addShinyBtn:hover:not(:disabled) {
+  background: var(--gold-primary);
+  color: #000;
+}
+
+/* Sacrificed selections row list */
+.selectedSacrificesBox {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px dashed rgba(255, 255, 255, 0.08);
+  padding: 16px;
+  margin-bottom: 24px;
+}
+
+.boxTitle {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--gold-light);
+  margin-bottom: 12px;
+}
+
+.sacrificedList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.sacrificedRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 0.85rem;
+}
+
+.sacRowName {
+  color: var(--text-primary);
+  font-weight: 600;
+  flex-grow: 1;
+}
+
+.sacRowQty {
+  font-weight: 800;
+  color: var(--gold-primary);
+  margin-right: 16px;
+}
+
+.removeBtn {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+  padding: 4px 8px;
+  font-size: 0.7rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.removeBtn:hover:not(:disabled) {
+  background: #ef4444;
+  color: #fff;
+}
+
+/* RULETA VISUAL */
+.rouletteContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0 30px 0;
+  flex-grow: 1;
+}
+
+.rouletteWrapper {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+.rouletteWheel {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid var(--gold-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+  transition: background 0.3s ease;
+  box-sizing: border-box;
+}
+
+.innerWheelCenter {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: #060608;
+  border: 1px solid var(--gold-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+
+.probValue {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--gold-primary);
+  line-height: 1.1;
+}
+
+.probLabel {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.roulettePointer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Puntero triangular que gira */
+.roulettePointer::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 22px solid #ef4444;
+}
+
+.betControls {
+  margin-top: auto;
+}
+
+.weightStatus {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+  letter-spacing: 0.05em;
+}
+
+.highlightText {
+  color: var(--gold-primary);
+}
+
+/* Result banner */
+.resultBanner {
+  margin-top: 24px;
+  padding: 16px;
+  text-align: center;
+  border-left: 3px solid;
+  animation: fadeIn 0.4s ease;
+}
+
+.resultSuccess {
+  background: rgba(52, 199, 89, 0.1);
+  border-left-color: var(--element-earth);
+  color: var(--element-earth);
+}
+
+.resultFail {
+  background: rgba(255, 59, 48, 0.1);
+  border-left-color: var(--element-fire);
+  color: var(--element-fire);
+}
+
+.resultTitle {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.resultText {
+  font-size: 0.85rem;
+}
+
+/* Target selector grid */
+.targetGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  overflow-y: auto;
+  max-height: 600px;
+  padding-right: 4px;
+}
+
+.targetSelectorCard {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.targetSelectorCard:hover {
+  background: rgba(212, 175, 55, 0.06);
+  border-color: rgba(212, 175, 55, 0.3);
+}
+
+.selectedTarget {
+  background: rgba(212, 175, 55, 0.1) !important;
+  border-color: var(--gold-primary) !important;
+}
+
+.miniPreviewContainer {
+  width: 60px;
+  aspect-ratio: 2 / 3;
+  flex-shrink: 0;
+}
+
+.targetInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.targetName {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.targetRarity {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.selectedTargetBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.targetCardWrapper {
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1200px) {
+  .panel {
+    min-height: auto;
+    padding: 16px;
+  }
+  
+  .candidateGrid {
+    max-height: 300px;
+  }
+  
+  .targetGrid {
+    max-height: 300px;
+  }
+  
+  .rouletteContainer {
+    margin: 10px 0;
+  }
+}

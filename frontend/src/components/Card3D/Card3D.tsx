@@ -2,6 +2,7 @@
 
 import { useRef, useState } from 'react';
 import styles from './Card3D.module.css';
+import { useUser } from '@/context/UserContext';
 
 interface CardProps {
   id: string;
@@ -16,6 +17,8 @@ interface CardProps {
   countSpecial?: number;
   isSpecial?: boolean; // Force-render como holographic (para la animación de apertura)
   level?: number;
+  minimal?: boolean; // Minimal mode for album grid
+  illustrationOnly?: boolean;
 }
 
 export default function Card3D({
@@ -31,30 +34,90 @@ export default function Card3D({
   countSpecial = 0,
   isSpecial = false,
   level = 1,
+  minimal = false,
+  illustrationOnly = false,
 }: CardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [transform, setTransform] = useState('rotateX(0deg) rotateY(0deg)');
 
-  const getElementEmoji = (el: string) => {
-    switch (el.toUpperCase()) {
-      case 'FIRE':
-        return '🔥';
-      case 'WATER':
-        return '💧';
-      case 'EARTH':
-        return '🗿';
-      case 'AIR':
-        return '🌀';
-      case 'SHADOW':
-        return '🌑';
-      case 'LIGHT':
-        return '👑';
+  let gameConfig: any = null;
+  try {
+    const context = useUser();
+    gameConfig = context?.gameConfig;
+  } catch (e) {
+    // Fallback if rendered outside of provider
+  }
+
+  const getRarityPriority = (r: string) => {
+    if (gameConfig && gameConfig.rarities) {
+      const config = gameConfig.rarities.find(
+        (item: any) => item.id.toUpperCase() === r.toUpperCase()
+      );
+      if (config && typeof config.priority === 'number') {
+        return config.priority;
+      }
+    }
+    switch (r.toUpperCase()) {
+      case 'COMMON':
+        return 1;
+      case 'RARE':
+        return 3;
+      case 'EPIC':
+        return 5;
+      case 'LEGENDARY':
+        return 8;
+      case 'MYTHIC':
+        return 10;
       default:
-        return '🃏';
+        return 1;
     }
   };
 
+  const getPriorityClass = (pri: number) => {
+    if (pri <= 3) return styles.priorityLow;
+    if (pri <= 6) return styles.priorityMedium;
+    if (pri <= 8) return styles.priorityHigh;
+    return styles.priorityMax;
+  };
+
+  const getElementName = (el: string) => {
+    if (!el) return '';
+    if (gameConfig && gameConfig.elements) {
+      const config = gameConfig.elements.find(
+        (item: any) => item.id.toUpperCase() === el.toUpperCase() || item.name.toUpperCase() === el.toUpperCase()
+      );
+      if (config) return config.name;
+    }
+    return el;
+  };
+
+  const getRarityName = (r: string) => {
+    if (!r) return '';
+    if (gameConfig && gameConfig.rarities) {
+      const config = gameConfig.rarities.find(
+        (item: any) => item.id.toUpperCase() === r.toUpperCase() || item.name.toUpperCase() === r.toUpperCase()
+      );
+      if (config) return config.name;
+    }
+    return r;
+  };
+
+  const getElementAbbreviation = (el: string) => {
+    if (!el) return '';
+    const resolvedName = getElementName(el);
+    return resolvedName.substring(0, 3).toUpperCase();
+  };
+
   const getRarityColor = (r: string) => {
+    if (!r) return 'white';
+    if (gameConfig && gameConfig.rarities) {
+      const config = gameConfig.rarities.find(
+        (item: any) => item.id.toUpperCase() === r.toUpperCase() || item.name.toUpperCase() === r.toUpperCase()
+      );
+      if (config && config.color) {
+        return config.color;
+      }
+    }
     switch (r.toUpperCase()) {
       case 'COMMON':
         return 'var(--rarity-common)';
@@ -72,6 +135,15 @@ export default function Card3D({
   };
 
   const getRarityGlow = (r: string) => {
+    if (!r) return 'none';
+    if (gameConfig && gameConfig.rarities) {
+      const config = gameConfig.rarities.find(
+        (item: any) => item.id.toUpperCase() === r.toUpperCase() || item.name.toUpperCase() === r.toUpperCase()
+      );
+      if (config && config.color) {
+        return `0 4px 15px ${config.color}66`;
+      }
+    }
     switch (r.toUpperCase()) {
       case 'COMMON':
         return 'var(--glow-common)';
@@ -89,6 +161,15 @@ export default function Card3D({
   };
 
   const getElementColor = (el: string) => {
+    if (!el) return '#27272a';
+    if (gameConfig && gameConfig.elements) {
+      const config = gameConfig.elements.find(
+        (item: any) => item.id.toUpperCase() === el.toUpperCase() || item.name.toUpperCase() === el.toUpperCase()
+      );
+      if (config && config.color) {
+        return config.color;
+      }
+    }
     switch (el.toUpperCase()) {
       case 'FIRE':
         return 'var(--element-fire)';
@@ -116,86 +197,143 @@ export default function Card3D({
     const middleX = rect.width / 2;
     const middleY = rect.height / 2;
 
-    // Máximo 15 grados de inclinación
     const rotateY = ((x - middleX) / middleX) * 15;
     const rotateX = ((middleY - y) / middleY) * 15;
 
     setTransform(`rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`);
+
+    // Set dynamic reflection coordinates
+    const sheenX = (x / rect.width) * 100;
+    const sheenY = (y / rect.height) * 100;
+    card.style.setProperty('--sheen-x', `${sheenX}%`);
+    card.style.setProperty('--sheen-y', `${sheenY}%`);
   };
 
   const handleMouseLeave = () => {
     setTransform('rotateX(0deg) rotateY(0deg) scale(1)');
+    if (cardRef.current) {
+      cardRef.current.style.setProperty('--sheen-x', '50%');
+      cardRef.current.style.setProperty('--sheen-y', '50%');
+    }
   };
 
+  const priority = getRarityPriority(rarity);
+  const priorityClass = getPriorityClass(priority);
   const isShiny = isSpecial || countSpecial > 0;
   const scaledPower = Math.round(power * (isShiny ? 1.2 : 1.0) * (1 + (level - 1) * 0.15));
   const borderStyle = owned
     ? ({
-        borderColor: getRarityColor(rarity),
+        '--border-color': getRarityColor(rarity),
+        '--rarity-color': getRarityColor(rarity),
         '--rarity-glow': getRarityGlow(rarity),
+        '--rarity-priority': priority,
       } as React.CSSProperties)
     : {};
 
   return (
     <div
-      className={styles.cardWrapper}
+      className={`${styles.cardWrapper} ${minimal ? styles.wrapperMinimal : styles.wrapperHorizontal}`}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
       <div
         ref={cardRef}
-        className={`${styles.card} ${!owned ? styles.locked : ''}`}
+        className={`${styles.card} ${priorityClass} ${!owned ? styles.locked : ''} ${minimal ? styles.cardMinimal : styles.cardHorizontal}`}
         style={{ transform, ...borderStyle }}
       >
-        {/* Capa holográfica especial */}
+        {/* Holographic shiny layer */}
         {owned && isShiny && <div className={styles.shinyOverlay} />}
 
-        {/* Badges de cantidades */}
-        {owned && (
-          <div className={styles.badgeContainer}>
-            {countNormal > 0 && <span className={styles.countBadge}>x{countNormal}</span>}
-            {countSpecial > 0 && <span className={styles.specialBadge}>SHINY x{countSpecial}</span>}
-          </div>
-        )}
+        {/* Hover light sheen sweep */}
+        {owned && <div className={styles.cardSheen} />}
 
-        <div className={styles.cardInner}>
-          <div className={styles.header}>
-            <div className={styles.nameWrapper}>
-              {owned && level > 1 && <span className={styles.levelBadge}>Lvl.{level}</span>}
-              <span className={styles.name}>{name}</span>
+        {minimal || illustrationOnly ? (
+          /* Minimal Vertical Layout for album grid / illustration only */
+          <div className={styles.cardInnerMinimal}>
+            <div 
+              className={styles.imageAreaMinimal}
+              style={illustrationOnly ? { marginBottom: 0 } : {}}
+            >
+              {imageUrl ? (
+                <img
+                  src={
+                    imageUrl.startsWith('http://') || imageUrl.startsWith('https://') || imageUrl.startsWith('data:')
+                      ? imageUrl
+                      : imageUrl.startsWith('/uploads/') || imageUrl.startsWith('uploads/')
+                      ? `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}${imageUrl.startsWith('/') ? imageUrl : '/' + imageUrl}`
+                      : imageUrl
+                  }
+                  alt={name}
+                  className={styles.cardImageReal}
+                />
+              ) : (
+                <span className={styles.cardImage}>{getElementAbbreviation(element)}</span>
+              )}
             </div>
-            {owned && <span className={styles.power}>⚔️ {scaledPower}</span>}
-          </div>
-
-          <div className={styles.imageArea}>
-            {imageUrl ? (
-              <img
-                src={
-                  imageUrl.startsWith('http://') || imageUrl.startsWith('https://') || imageUrl.startsWith('data:')
-                    ? imageUrl
-                    : imageUrl.startsWith('/uploads/') || imageUrl.startsWith('uploads/')
-                    ? `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}${imageUrl.startsWith('/') ? imageUrl : '/' + imageUrl}`
-                    : imageUrl
-                }
-                alt={name}
-                className={styles.cardImageReal}
-              />
-            ) : (
-              <span className={styles.cardImage}>{getElementEmoji(element)}</span>
+            {!illustrationOnly && (
+              <div className={styles.footerMinimal}>
+                <span className={styles.element} style={{ backgroundColor: getElementColor(element) }}>
+                  {getElementName(element)}
+                </span>
+                <span className={styles.rarity} style={{ color: getRarityColor(rarity) }}>
+                  {getRarityName(rarity)}
+                </span>
+              </div>
             )}
           </div>
+        ) : (
+          /* New Horizontal Layout: 50% left illustration, 50% right details */
+          <div className={styles.cardInnerHorizontal}>
+            {/* Left 50%: Illustration */}
+            <div className={styles.leftHalf}>
+              {imageUrl ? (
+                <img
+                  src={
+                    imageUrl.startsWith('http://') || imageUrl.startsWith('https://') || imageUrl.startsWith('data:')
+                      ? imageUrl
+                      : imageUrl.startsWith('/uploads/') || imageUrl.startsWith('uploads/')
+                      ? `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}${imageUrl.startsWith('/') ? imageUrl : '/' + imageUrl}`
+                      : imageUrl
+                  }
+                  alt={name}
+                  className={styles.cardImageReal}
+                />
+              ) : (
+                <span className={styles.cardImage}>{getElementAbbreviation(element)}</span>
+              )}
+            </div>
 
-          <p className={styles.description}>{description}</p>
+            {/* Right 50%: Details */}
+            <div className={styles.rightHalf}>
+              {/* Quantities Badges if owned */}
+              {owned && (
+                <div className={styles.badgeContainerHorizontal}>
+                  {countNormal > 0 && <span className={styles.countBadge}>x{countNormal}</span>}
+                  {countSpecial > 0 && <span className={styles.specialBadge}>SHINY x{countSpecial}</span>}
+                </div>
+              )}
 
-          <div className={styles.footer}>
-            <span className={styles.element} style={{ backgroundColor: getElementColor(element) }}>
-              {element}
-            </span>
-            <span className={styles.rarity} style={{ color: getRarityColor(rarity) }}>
-              {rarity}
-            </span>
+              <div className={styles.detailsHeader}>
+                <div className={styles.nameAndLevel}>
+                  {owned && level > 1 && <span className={styles.levelBadge}>Nivel {level}</span>}
+                  <span className={styles.name}>{name}</span>
+                </div>
+                {owned && <span className={styles.power}>Poder: {scaledPower}</span>}
+              </div>
+
+              <p className={styles.descriptionText}>{description}</p>
+
+              <div className={styles.detailsFooter}>
+                <span className={styles.element} style={{ backgroundColor: getElementColor(element) }}>
+                  {getElementName(element)}
+                </span>
+                <span className={styles.rarity} style={{ color: getRarityColor(rarity) }}>
+                  {getRarityName(rarity)}
+                </span>
+              </div>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

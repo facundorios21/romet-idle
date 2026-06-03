@@ -1,4 +1,6 @@
 import { Injectable, Inject, BadRequestException, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { IUserRepositoryToken } from '../../core/interfaces/user-repository.interface';
 import type { IUserRepository } from '../../core/interfaces/user-repository.interface';
 import { ICardRepositoryToken } from '../../core/interfaces/card-repository.interface';
@@ -8,6 +10,7 @@ import type { IUserCardRepository } from '../../core/interfaces/user-card-reposi
 import { IPackRepositoryToken } from '../../core/interfaces/pack-repository.interface';
 import type { IPackRepository } from '../../core/interfaces/pack-repository.interface';
 import { Card } from '../../core/entities/card.entity';
+import { RarityEntity } from '../../infrastructure/typeorm/entities/rarity.entity';
 
 @Injectable()
 export class BuyPackUseCase {
@@ -22,9 +25,11 @@ export class BuyPackUseCase {
     private readonly userCardRepository: IUserCardRepository,
     @Inject(IPackRepositoryToken)
     private readonly packRepository: IPackRepository,
+    @InjectRepository(RarityEntity)
+    private readonly rarityRepository: Repository<RarityEntity>,
   ) {}
 
-  async execute(userId: number, packType: string) {
+  async execute(userId: string, packType: string) {
     const pack = await this.packRepository.findById(packType.toLowerCase());
     if (!pack) {
       throw new BadRequestException('Tipo de sobre no válido.');
@@ -45,6 +50,23 @@ export class BuyPackUseCase {
       throw new BadRequestException('No hay cartas registradas en el sistema. Asegúrate de correr el seed.');
     }
 
+    const rarities = await this.rarityRepository.find();
+    const rarityToPoolMap = new Map<string, string>();
+    for (const r of rarities) {
+      const nameNorm = r.name.toLowerCase();
+      if (nameNorm.includes('común') || nameNorm.includes('comun') || nameNorm.includes('common')) {
+        rarityToPoolMap.set(r.id.toUpperCase(), 'COMMON');
+      } else if (nameNorm.includes('raro') || nameNorm.includes('rare')) {
+        rarityToPoolMap.set(r.id.toUpperCase(), 'RARE');
+      } else if (nameNorm.includes('épico') || nameNorm.includes('epico') || nameNorm.includes('epic')) {
+        rarityToPoolMap.set(r.id.toUpperCase(), 'EPIC');
+      } else if (nameNorm.includes('legendario') || nameNorm.includes('legendary')) {
+        rarityToPoolMap.set(r.id.toUpperCase(), 'LEGENDARY');
+      } else if (nameNorm.includes('mítico') || nameNorm.includes('mitico') || nameNorm.includes('mythic')) {
+        rarityToPoolMap.set(r.id.toUpperCase(), 'MYTHIC');
+      }
+    }
+
     const pools: Record<string, Card[]> = {
       COMMON: [],
       RARE: [],
@@ -54,8 +76,9 @@ export class BuyPackUseCase {
     };
 
     for (const card of allCards) {
-      if (pools[card.rarity]) {
-        pools[card.rarity].push(card);
+      const mappedPool = rarityToPoolMap.get(card.rarity.toUpperCase()) ?? 'COMMON';
+      if (pools[mappedPool]) {
+        pools[mappedPool].push(card);
       }
     }
 
