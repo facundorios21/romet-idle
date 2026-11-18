@@ -1,0 +1,2724 @@
+{
+ "tile_size": 16,
+ "sheet": "RPG_Items_Sheet.png",
+ "sheet_columns": 20,
+ "categories": [
+  "Swords",
+  "Axes & Hammers",
+  "Spears & Daggers",
+  "Bows & Ranged",
+  "Staffs & Wands",
+  "Shields",
+  "Helmets",
+  "Armor",
+  "Accessories",
+  "Potions",
+  "Food",
+  "Materials",
+  "Treasure",
+  "Scrolls & Books",
+  "Tools"
+ ],
+ "items": [
+  {
+   "name": "WoodenSword",
+   "display_name": "Wooden Sword",
+   "category": "Swords",
+   "index": 0,
+   "file": "Items/Swords/WoodenSword.png",
+   "sheet_x": 0,
+   "sheet_y": 0
+  },
+  {
+   "name": "IronSword",
+   "display_name": "Iron Sword",
+   "category": "Swords",
+   "index": 1,
+   "file": "Items/Swords/IronSword.png",
+   "sheet_x": 16,
+   "sheet_y": 0
+  },
+  {
+   "name": "SteelLongsword",
+   "display_name": "Steel Longsword",
+   "category": "Swords",
+   "index": 2,
+   "file": "Items/Swords/SteelLongsword.png",
+   "sheet_x": 32,
+   "sheet_y": 0
+  },
+  {
+   "name": "GoldenSword",
+   "display_name": "Golden Sword",
+   "category": "Swords",
+   "index": 3,
+   "file": "Items/Swords/GoldenSword.png",
+   "sheet_x": 48,
+   "sheet_y": 0
+  },
+  {
+   "name": "Broadsword",
+   "display_name": "Broadsword",
+   "category": "Swords",
+   "index": 4,
+   "file": "Items/Swords/Broadsword.png",
+   "sheet_x": 64,
+   "sheet_y": 0
+  },
+  {
+   "name": "Greatsword",
+   "display_name": "Greatsword",
+   "category": "Swords",
+   "index": 5,
+   "file": "Items/Swords/Greatsword.png",
+   "sheet_x": 80,
+   "sheet_y": 0
+  },
+  {
+   "name": "Katana",
+   "display_name": "Katana",
+   "category": "Swords",
+   "index": 6,
+   "file": "Items/Swords/Katana.png",
+   "sheet_x": 96,
+   "sheet_y": 0
+  },
+  {
+   "name": "Rapier",
+   "display_name": "Rapier",
+   "category": "Swords",
+   "index": 7,
+   "file": "Items/Swords/Rapier.png",
+   "sheet_x": 112,
+   "sheet_y": 0
+  },
+  {
+   "name": "Scimitar",
+   "display_name": "Scimitar",
+   "category": "Swords",
+   "index": 8,
+   "file": "Items/Swords/Scimitar.png",
+   "sheet_x": 128,
+   "sheet_y": 0
+  },
+  {
+   "name": "Cutlass",
+   "display_name": "Cutlass",
+   "category": "Swords",
+   "index": 9,
+   "file": "Items/Swords/Cutlass.png",
+   "sheet_x": 144,
+   "sheet_y": 0
+  },
+  {
+   "name": "CrystalSword",
+   "display_name": "Crystal Sword",
+   "category": "Swords",
+   "index": 10,
+   "file": "Items/Swords/CrystalSword.png",
+   "sheet_x": 160,
+   "sheet_y": 0
+  },
+  {
+   "name": "FlameSword",
+   "display_name": "Flame Sword",
+   "category": "Swords",
+   "index": 11,
+   "file": "Items/Swords/FlameSword.png",
+   "sheet_x": 176,
+   "sheet_y": 0
+  },
+  {
+   "name": "FrostSword",
+   "display_name": "Frost Sword",
+   "category": "Swords",
+   "index": 12,
+   "file": "Items/Swords/FrostSword.png",
+   "sheet_x": 192,
+   "sheet_y": 0
+  },
+  {
+   "name": "ShadowSword",
+   "display_name": "Shadow Sword",
+   "category": "Swords",
+   "index": 13,
+   "file": "Items/Swords/ShadowSword.png",
+   "sheet_x": 208,
+   "sheet_y": 0
+  },
+  {
+   "name": "HolySword",
+   "display_name": "Holy Sword",
+   "category": "Swords",
+   "index": 14,
+   "file": "Items/Swords/HolySword.png",
+   "sheet_x": 224,
+   "sheet_y": 0
+  },
+  {
+   "name": "BoneSword",
+   "display_name": "Bone Sword",
+   "category": "Swords",
+   "index": 15,
+   "file": "Items/Swords/BoneSword.png",
+   "sheet_x": 240,
+   "sheet_y": 0
+  },
+  {
+   "name": "SerratedSword",
+   "display_name": "Serrated Sword",
+   "category": "Swords",
+   "index": 16,
+   "file": "Items/Swords/SerratedSword.png",
+   "sheet_x": 256,
+   "sheet_y": 0
+  },
+  {
+   "name": "RuneSword",
+   "display_name": "Rune Sword",
+   "category": "Swords",
+   "index": 17,
+   "file": "Items/Swords/RuneSword.png",
+   "sheet_x": 272,
+   "sheet_y": 0
+  },
+  {
+   "name": "DragonSlayer",
+   "display_name": "Dragon Slayer",
+   "category": "Swords",
+   "index": 18,
+   "file": "Items/Swords/DragonSlayer.png",
+   "sheet_x": 288,
+   "sheet_y": 0
+  },
+  {
+   "name": "RoyalSword",
+   "display_name": "Royal Sword",
+   "category": "Swords",
+   "index": 19,
+   "file": "Items/Swords/RoyalSword.png",
+   "sheet_x": 304,
+   "sheet_y": 0
+  },
+  {
+   "name": "Hatchet",
+   "display_name": "Hatchet",
+   "category": "Axes & Hammers",
+   "index": 20,
+   "file": "Items/Axes_Hammers/Hatchet.png",
+   "sheet_x": 0,
+   "sheet_y": 16
+  },
+  {
+   "name": "IronAxe",
+   "display_name": "Iron Axe",
+   "category": "Axes & Hammers",
+   "index": 21,
+   "file": "Items/Axes_Hammers/IronAxe.png",
+   "sheet_x": 16,
+   "sheet_y": 16
+  },
+  {
+   "name": "BattleAxe",
+   "display_name": "Battle Axe",
+   "category": "Axes & Hammers",
+   "index": 22,
+   "file": "Items/Axes_Hammers/BattleAxe.png",
+   "sheet_x": 32,
+   "sheet_y": 16
+  },
+  {
+   "name": "DoubleAxe",
+   "display_name": "Double Axe",
+   "category": "Axes & Hammers",
+   "index": 23,
+   "file": "Items/Axes_Hammers/DoubleAxe.png",
+   "sheet_x": 48,
+   "sheet_y": 16
+  },
+  {
+   "name": "GoldenAxe",
+   "display_name": "Golden Axe",
+   "category": "Axes & Hammers",
+   "index": 24,
+   "file": "Items/Axes_Hammers/GoldenAxe.png",
+   "sheet_x": 64,
+   "sheet_y": 16
+  },
+  {
+   "name": "CrystalAxe",
+   "display_name": "Crystal Axe",
+   "category": "Axes & Hammers",
+   "index": 25,
+   "file": "Items/Axes_Hammers/CrystalAxe.png",
+   "sheet_x": 80,
+   "sheet_y": 16
+  },
+  {
+   "name": "ObsidianAxe",
+   "display_name": "Obsidian Axe",
+   "category": "Axes & Hammers",
+   "index": 26,
+   "file": "Items/Axes_Hammers/ObsidianAxe.png",
+   "sheet_x": 96,
+   "sheet_y": 16
+  },
+  {
+   "name": "WoodenClub",
+   "display_name": "Wooden Club",
+   "category": "Axes & Hammers",
+   "index": 27,
+   "file": "Items/Axes_Hammers/WoodenClub.png",
+   "sheet_x": 112,
+   "sheet_y": 16
+  },
+  {
+   "name": "SpikedClub",
+   "display_name": "Spiked Club",
+   "category": "Axes & Hammers",
+   "index": 28,
+   "file": "Items/Axes_Hammers/SpikedClub.png",
+   "sheet_x": 128,
+   "sheet_y": 16
+  },
+  {
+   "name": "BoneClub",
+   "display_name": "Bone Club",
+   "category": "Axes & Hammers",
+   "index": 29,
+   "file": "Items/Axes_Hammers/BoneClub.png",
+   "sheet_x": 144,
+   "sheet_y": 16
+  },
+  {
+   "name": "IronMace",
+   "display_name": "Iron Mace",
+   "category": "Axes & Hammers",
+   "index": 30,
+   "file": "Items/Axes_Hammers/IronMace.png",
+   "sheet_x": 160,
+   "sheet_y": 16
+  },
+  {
+   "name": "SpikedMace",
+   "display_name": "Spiked Mace",
+   "category": "Axes & Hammers",
+   "index": 31,
+   "file": "Items/Axes_Hammers/SpikedMace.png",
+   "sheet_x": 176,
+   "sheet_y": 16
+  },
+  {
+   "name": "GoldenMace",
+   "display_name": "Golden Mace",
+   "category": "Axes & Hammers",
+   "index": 32,
+   "file": "Items/Axes_Hammers/GoldenMace.png",
+   "sheet_x": 192,
+   "sheet_y": 16
+  },
+  {
+   "name": "CrystalMace",
+   "display_name": "Crystal Mace",
+   "category": "Axes & Hammers",
+   "index": 33,
+   "file": "Items/Axes_Hammers/CrystalMace.png",
+   "sheet_x": 208,
+   "sheet_y": 16
+  },
+  {
+   "name": "MorningStar",
+   "display_name": "Morning Star",
+   "category": "Axes & Hammers",
+   "index": 34,
+   "file": "Items/Axes_Hammers/MorningStar.png",
+   "sheet_x": 224,
+   "sheet_y": 16
+  },
+  {
+   "name": "Mallet",
+   "display_name": "Mallet",
+   "category": "Axes & Hammers",
+   "index": 35,
+   "file": "Items/Axes_Hammers/Mallet.png",
+   "sheet_x": 240,
+   "sheet_y": 16
+  },
+  {
+   "name": "WarHammer",
+   "display_name": "War Hammer",
+   "category": "Axes & Hammers",
+   "index": 36,
+   "file": "Items/Axes_Hammers/WarHammer.png",
+   "sheet_x": 256,
+   "sheet_y": 16
+  },
+  {
+   "name": "IronHammer",
+   "display_name": "Iron Hammer",
+   "category": "Axes & Hammers",
+   "index": 37,
+   "file": "Items/Axes_Hammers/IronHammer.png",
+   "sheet_x": 272,
+   "sheet_y": 16
+  },
+  {
+   "name": "GoldenHammer",
+   "display_name": "Golden Hammer",
+   "category": "Axes & Hammers",
+   "index": 38,
+   "file": "Items/Axes_Hammers/GoldenHammer.png",
+   "sheet_x": 288,
+   "sheet_y": 16
+  },
+  {
+   "name": "ThunderHammer",
+   "display_name": "Thunder Hammer",
+   "category": "Axes & Hammers",
+   "index": 39,
+   "file": "Items/Axes_Hammers/ThunderHammer.png",
+   "sheet_x": 304,
+   "sheet_y": 16
+  },
+  {
+   "name": "WoodenSpear",
+   "display_name": "Wooden Spear",
+   "category": "Spears & Daggers",
+   "index": 40,
+   "file": "Items/Spears_Daggers/WoodenSpear.png",
+   "sheet_x": 0,
+   "sheet_y": 32
+  },
+  {
+   "name": "IronSpear",
+   "display_name": "Iron Spear",
+   "category": "Spears & Daggers",
+   "index": 41,
+   "file": "Items/Spears_Daggers/IronSpear.png",
+   "sheet_x": 16,
+   "sheet_y": 32
+  },
+  {
+   "name": "GoldenSpear",
+   "display_name": "Golden Spear",
+   "category": "Spears & Daggers",
+   "index": 42,
+   "file": "Items/Spears_Daggers/GoldenSpear.png",
+   "sheet_x": 32,
+   "sheet_y": 32
+  },
+  {
+   "name": "CrystalSpear",
+   "display_name": "Crystal Spear",
+   "category": "Spears & Daggers",
+   "index": 43,
+   "file": "Items/Spears_Daggers/CrystalSpear.png",
+   "sheet_x": 48,
+   "sheet_y": 32
+  },
+  {
+   "name": "BoneSpear",
+   "display_name": "Bone Spear",
+   "category": "Spears & Daggers",
+   "index": 44,
+   "file": "Items/Spears_Daggers/BoneSpear.png",
+   "sheet_x": 64,
+   "sheet_y": 32
+  },
+  {
+   "name": "FlameSpear",
+   "display_name": "Flame Spear",
+   "category": "Spears & Daggers",
+   "index": 45,
+   "file": "Items/Spears_Daggers/FlameSpear.png",
+   "sheet_x": 80,
+   "sheet_y": 32
+  },
+  {
+   "name": "Trident",
+   "display_name": "Trident",
+   "category": "Spears & Daggers",
+   "index": 46,
+   "file": "Items/Spears_Daggers/Trident.png",
+   "sheet_x": 96,
+   "sheet_y": 32
+  },
+  {
+   "name": "Halberd",
+   "display_name": "Halberd",
+   "category": "Spears & Daggers",
+   "index": 47,
+   "file": "Items/Spears_Daggers/Halberd.png",
+   "sheet_x": 112,
+   "sheet_y": 32
+  },
+  {
+   "name": "Glaive",
+   "display_name": "Glaive",
+   "category": "Spears & Daggers",
+   "index": 48,
+   "file": "Items/Spears_Daggers/Glaive.png",
+   "sheet_x": 128,
+   "sheet_y": 32
+  },
+  {
+   "name": "Scythe",
+   "display_name": "Scythe",
+   "category": "Spears & Daggers",
+   "index": 49,
+   "file": "Items/Spears_Daggers/Scythe.png",
+   "sheet_x": 144,
+   "sheet_y": 32
+  },
+  {
+   "name": "Lance",
+   "display_name": "Lance",
+   "category": "Spears & Daggers",
+   "index": 50,
+   "file": "Items/Spears_Daggers/Lance.png",
+   "sheet_x": 160,
+   "sheet_y": 32
+  },
+  {
+   "name": "Dagger",
+   "display_name": "Dagger",
+   "category": "Spears & Daggers",
+   "index": 51,
+   "file": "Items/Spears_Daggers/Dagger.png",
+   "sheet_x": 176,
+   "sheet_y": 32
+  },
+  {
+   "name": "GoldenDagger",
+   "display_name": "Golden Dagger",
+   "category": "Spears & Daggers",
+   "index": 52,
+   "file": "Items/Spears_Daggers/GoldenDagger.png",
+   "sheet_x": 192,
+   "sheet_y": 32
+  },
+  {
+   "name": "CrystalDagger",
+   "display_name": "Crystal Dagger",
+   "category": "Spears & Daggers",
+   "index": 53,
+   "file": "Items/Spears_Daggers/CrystalDagger.png",
+   "sheet_x": 208,
+   "sheet_y": 32
+  },
+  {
+   "name": "PoisonDagger",
+   "display_name": "Poison Dagger",
+   "category": "Spears & Daggers",
+   "index": 54,
+   "file": "Items/Spears_Daggers/PoisonDagger.png",
+   "sheet_x": 224,
+   "sheet_y": 32
+  },
+  {
+   "name": "BoneKnife",
+   "display_name": "Bone Knife",
+   "category": "Spears & Daggers",
+   "index": 55,
+   "file": "Items/Spears_Daggers/BoneKnife.png",
+   "sheet_x": 240,
+   "sheet_y": 32
+  },
+  {
+   "name": "WavyDagger",
+   "display_name": "Wavy Dagger",
+   "category": "Spears & Daggers",
+   "index": 56,
+   "file": "Items/Spears_Daggers/WavyDagger.png",
+   "sheet_x": 256,
+   "sheet_y": 32
+  },
+  {
+   "name": "Kunai",
+   "display_name": "Kunai",
+   "category": "Spears & Daggers",
+   "index": 57,
+   "file": "Items/Spears_Daggers/Kunai.png",
+   "sheet_x": 272,
+   "sheet_y": 32
+  },
+  {
+   "name": "Sai",
+   "display_name": "Sai",
+   "category": "Spears & Daggers",
+   "index": 58,
+   "file": "Items/Spears_Daggers/Sai.png",
+   "sheet_x": 288,
+   "sheet_y": 32
+  },
+  {
+   "name": "Sickle",
+   "display_name": "Sickle",
+   "category": "Spears & Daggers",
+   "index": 59,
+   "file": "Items/Spears_Daggers/Sickle.png",
+   "sheet_x": 304,
+   "sheet_y": 32
+  },
+  {
+   "name": "ShortBow",
+   "display_name": "Short Bow",
+   "category": "Bows & Ranged",
+   "index": 60,
+   "file": "Items/Bows_Ranged/ShortBow.png",
+   "sheet_x": 0,
+   "sheet_y": 48
+  },
+  {
+   "name": "LongBow",
+   "display_name": "Long Bow",
+   "category": "Bows & Ranged",
+   "index": 61,
+   "file": "Items/Bows_Ranged/LongBow.png",
+   "sheet_x": 16,
+   "sheet_y": 48
+  },
+  {
+   "name": "HuntingBow",
+   "display_name": "Hunting Bow",
+   "category": "Bows & Ranged",
+   "index": 62,
+   "file": "Items/Bows_Ranged/HuntingBow.png",
+   "sheet_x": 32,
+   "sheet_y": 48
+  },
+  {
+   "name": "ElvenBow",
+   "display_name": "Elven Bow",
+   "category": "Bows & Ranged",
+   "index": 63,
+   "file": "Items/Bows_Ranged/ElvenBow.png",
+   "sheet_x": 48,
+   "sheet_y": 48
+  },
+  {
+   "name": "GoldenBow",
+   "display_name": "Golden Bow",
+   "category": "Bows & Ranged",
+   "index": 64,
+   "file": "Items/Bows_Ranged/GoldenBow.png",
+   "sheet_x": 64,
+   "sheet_y": 48
+  },
+  {
+   "name": "CrystalBow",
+   "display_name": "Crystal Bow",
+   "category": "Bows & Ranged",
+   "index": 65,
+   "file": "Items/Bows_Ranged/CrystalBow.png",
+   "sheet_x": 80,
+   "sheet_y": 48
+  },
+  {
+   "name": "BoneBow",
+   "display_name": "Bone Bow",
+   "category": "Bows & Ranged",
+   "index": 66,
+   "file": "Items/Bows_Ranged/BoneBow.png",
+   "sheet_x": 96,
+   "sheet_y": 48
+  },
+  {
+   "name": "Crossbow",
+   "display_name": "Crossbow",
+   "category": "Bows & Ranged",
+   "index": 67,
+   "file": "Items/Bows_Ranged/Crossbow.png",
+   "sheet_x": 112,
+   "sheet_y": 48
+  },
+  {
+   "name": "HeavyCrossbow",
+   "display_name": "Heavy Crossbow",
+   "category": "Bows & Ranged",
+   "index": 68,
+   "file": "Items/Bows_Ranged/HeavyCrossbow.png",
+   "sheet_x": 128,
+   "sheet_y": 48
+  },
+  {
+   "name": "GoldenCrossbow",
+   "display_name": "Golden Crossbow",
+   "category": "Bows & Ranged",
+   "index": 69,
+   "file": "Items/Bows_Ranged/GoldenCrossbow.png",
+   "sheet_x": 144,
+   "sheet_y": 48
+  },
+  {
+   "name": "Arrow",
+   "display_name": "Arrow",
+   "category": "Bows & Ranged",
+   "index": 70,
+   "file": "Items/Bows_Ranged/Arrow.png",
+   "sheet_x": 160,
+   "sheet_y": 48
+  },
+  {
+   "name": "FireArrow",
+   "display_name": "Fire Arrow",
+   "category": "Bows & Ranged",
+   "index": 71,
+   "file": "Items/Bows_Ranged/FireArrow.png",
+   "sheet_x": 176,
+   "sheet_y": 48
+  },
+  {
+   "name": "IceArrow",
+   "display_name": "Ice Arrow",
+   "category": "Bows & Ranged",
+   "index": 72,
+   "file": "Items/Bows_Ranged/IceArrow.png",
+   "sheet_x": 192,
+   "sheet_y": 48
+  },
+  {
+   "name": "PoisonArrow",
+   "display_name": "Poison Arrow",
+   "category": "Bows & Ranged",
+   "index": 73,
+   "file": "Items/Bows_Ranged/PoisonArrow.png",
+   "sheet_x": 208,
+   "sheet_y": 48
+  },
+  {
+   "name": "CrossbowBolt",
+   "display_name": "Crossbow Bolt",
+   "category": "Bows & Ranged",
+   "index": 74,
+   "file": "Items/Bows_Ranged/CrossbowBolt.png",
+   "sheet_x": 224,
+   "sheet_y": 48
+  },
+  {
+   "name": "ArrowBundle",
+   "display_name": "Arrow Bundle",
+   "category": "Bows & Ranged",
+   "index": 75,
+   "file": "Items/Bows_Ranged/ArrowBundle.png",
+   "sheet_x": 240,
+   "sheet_y": 48
+  },
+  {
+   "name": "Quiver",
+   "display_name": "Quiver",
+   "category": "Bows & Ranged",
+   "index": 76,
+   "file": "Items/Bows_Ranged/Quiver.png",
+   "sheet_x": 256,
+   "sheet_y": 48
+  },
+  {
+   "name": "Slingshot",
+   "display_name": "Slingshot",
+   "category": "Bows & Ranged",
+   "index": 77,
+   "file": "Items/Bows_Ranged/Slingshot.png",
+   "sheet_x": 272,
+   "sheet_y": 48
+  },
+  {
+   "name": "Boomerang",
+   "display_name": "Boomerang",
+   "category": "Bows & Ranged",
+   "index": 78,
+   "file": "Items/Bows_Ranged/Boomerang.png",
+   "sheet_x": 288,
+   "sheet_y": 48
+  },
+  {
+   "name": "Shuriken",
+   "display_name": "Shuriken",
+   "category": "Bows & Ranged",
+   "index": 79,
+   "file": "Items/Bows_Ranged/Shuriken.png",
+   "sheet_x": 304,
+   "sheet_y": 48
+  },
+  {
+   "name": "WoodenStaff",
+   "display_name": "Wooden Staff",
+   "category": "Staffs & Wands",
+   "index": 80,
+   "file": "Items/Staffs_Wands/WoodenStaff.png",
+   "sheet_x": 0,
+   "sheet_y": 64
+  },
+  {
+   "name": "ApprenticeStaff",
+   "display_name": "Apprentice Staff",
+   "category": "Staffs & Wands",
+   "index": 81,
+   "file": "Items/Staffs_Wands/ApprenticeStaff.png",
+   "sheet_x": 16,
+   "sheet_y": 64
+  },
+  {
+   "name": "FireStaff",
+   "display_name": "Fire Staff",
+   "category": "Staffs & Wands",
+   "index": 82,
+   "file": "Items/Staffs_Wands/FireStaff.png",
+   "sheet_x": 32,
+   "sheet_y": 64
+  },
+  {
+   "name": "IceStaff",
+   "display_name": "Ice Staff",
+   "category": "Staffs & Wands",
+   "index": 83,
+   "file": "Items/Staffs_Wands/IceStaff.png",
+   "sheet_x": 48,
+   "sheet_y": 64
+  },
+  {
+   "name": "ThunderStaff",
+   "display_name": "Thunder Staff",
+   "category": "Staffs & Wands",
+   "index": 84,
+   "file": "Items/Staffs_Wands/ThunderStaff.png",
+   "sheet_x": 64,
+   "sheet_y": 64
+  },
+  {
+   "name": "NatureStaff",
+   "display_name": "Nature Staff",
+   "category": "Staffs & Wands",
+   "index": 85,
+   "file": "Items/Staffs_Wands/NatureStaff.png",
+   "sheet_x": 80,
+   "sheet_y": 64
+  },
+  {
+   "name": "ShadowStaff",
+   "display_name": "Shadow Staff",
+   "category": "Staffs & Wands",
+   "index": 86,
+   "file": "Items/Staffs_Wands/ShadowStaff.png",
+   "sheet_x": 96,
+   "sheet_y": 64
+  },
+  {
+   "name": "HolyStaff",
+   "display_name": "Holy Staff",
+   "category": "Staffs & Wands",
+   "index": 87,
+   "file": "Items/Staffs_Wands/HolyStaff.png",
+   "sheet_x": 112,
+   "sheet_y": 64
+  },
+  {
+   "name": "CrystalStaff",
+   "display_name": "Crystal Staff",
+   "category": "Staffs & Wands",
+   "index": 88,
+   "file": "Items/Staffs_Wands/CrystalStaff.png",
+   "sheet_x": 128,
+   "sheet_y": 64
+  },
+  {
+   "name": "DruidStaff",
+   "display_name": "Druid Staff",
+   "category": "Staffs & Wands",
+   "index": 89,
+   "file": "Items/Staffs_Wands/DruidStaff.png",
+   "sheet_x": 144,
+   "sheet_y": 64
+  },
+  {
+   "name": "Wand",
+   "display_name": "Wand",
+   "category": "Staffs & Wands",
+   "index": 90,
+   "file": "Items/Staffs_Wands/Wand.png",
+   "sheet_x": 160,
+   "sheet_y": 64
+  },
+  {
+   "name": "StarWand",
+   "display_name": "Star Wand",
+   "category": "Staffs & Wands",
+   "index": 91,
+   "file": "Items/Staffs_Wands/StarWand.png",
+   "sheet_x": 176,
+   "sheet_y": 64
+  },
+  {
+   "name": "FireWand",
+   "display_name": "Fire Wand",
+   "category": "Staffs & Wands",
+   "index": 92,
+   "file": "Items/Staffs_Wands/FireWand.png",
+   "sheet_x": 192,
+   "sheet_y": 64
+  },
+  {
+   "name": "IceWand",
+   "display_name": "Ice Wand",
+   "category": "Staffs & Wands",
+   "index": 93,
+   "file": "Items/Staffs_Wands/IceWand.png",
+   "sheet_x": 208,
+   "sheet_y": 64
+  },
+  {
+   "name": "HeartWand",
+   "display_name": "Heart Wand",
+   "category": "Staffs & Wands",
+   "index": 94,
+   "file": "Items/Staffs_Wands/HeartWand.png",
+   "sheet_x": 224,
+   "sheet_y": 64
+  },
+  {
+   "name": "MoonWand",
+   "display_name": "Moon Wand",
+   "category": "Staffs & Wands",
+   "index": 95,
+   "file": "Items/Staffs_Wands/MoonWand.png",
+   "sheet_x": 240,
+   "sheet_y": 64
+  },
+  {
+   "name": "BoneWand",
+   "display_name": "Bone Wand",
+   "category": "Staffs & Wands",
+   "index": 96,
+   "file": "Items/Staffs_Wands/BoneWand.png",
+   "sheet_x": 256,
+   "sheet_y": 64
+  },
+  {
+   "name": "Scepter",
+   "display_name": "Scepter",
+   "category": "Staffs & Wands",
+   "index": 97,
+   "file": "Items/Staffs_Wands/Scepter.png",
+   "sheet_x": 272,
+   "sheet_y": 64
+  },
+  {
+   "name": "ArcaneOrb",
+   "display_name": "Arcane Orb",
+   "category": "Staffs & Wands",
+   "index": 98,
+   "file": "Items/Staffs_Wands/ArcaneOrb.png",
+   "sheet_x": 288,
+   "sheet_y": 64
+  },
+  {
+   "name": "FireOrb",
+   "display_name": "Fire Orb",
+   "category": "Staffs & Wands",
+   "index": 99,
+   "file": "Items/Staffs_Wands/FireOrb.png",
+   "sheet_x": 304,
+   "sheet_y": 64
+  },
+  {
+   "name": "WoodenShield",
+   "display_name": "Wooden Shield",
+   "category": "Shields",
+   "index": 100,
+   "file": "Items/Shields/WoodenShield.png",
+   "sheet_x": 0,
+   "sheet_y": 80
+  },
+  {
+   "name": "Buckler",
+   "display_name": "Buckler",
+   "category": "Shields",
+   "index": 101,
+   "file": "Items/Shields/Buckler.png",
+   "sheet_x": 16,
+   "sheet_y": 80
+  },
+  {
+   "name": "IronShield",
+   "display_name": "Iron Shield",
+   "category": "Shields",
+   "index": 102,
+   "file": "Items/Shields/IronShield.png",
+   "sheet_x": 32,
+   "sheet_y": 80
+  },
+  {
+   "name": "KnightShield",
+   "display_name": "Knight Shield",
+   "category": "Shields",
+   "index": 103,
+   "file": "Items/Shields/KnightShield.png",
+   "sheet_x": 48,
+   "sheet_y": 80
+  },
+  {
+   "name": "CrusaderShield",
+   "display_name": "Crusader Shield",
+   "category": "Shields",
+   "index": 104,
+   "file": "Items/Shields/CrusaderShield.png",
+   "sheet_x": 64,
+   "sheet_y": 80
+  },
+  {
+   "name": "RoyalShield",
+   "display_name": "Royal Shield",
+   "category": "Shields",
+   "index": 105,
+   "file": "Items/Shields/RoyalShield.png",
+   "sheet_x": 80,
+   "sheet_y": 80
+  },
+  {
+   "name": "KiteShield",
+   "display_name": "Kite Shield",
+   "category": "Shields",
+   "index": 106,
+   "file": "Items/Shields/KiteShield.png",
+   "sheet_x": 96,
+   "sheet_y": 80
+  },
+  {
+   "name": "TowerShield",
+   "display_name": "Tower Shield",
+   "category": "Shields",
+   "index": 107,
+   "file": "Items/Shields/TowerShield.png",
+   "sheet_x": 112,
+   "sheet_y": 80
+  },
+  {
+   "name": "GoldenShield",
+   "display_name": "Golden Shield",
+   "category": "Shields",
+   "index": 108,
+   "file": "Items/Shields/GoldenShield.png",
+   "sheet_x": 128,
+   "sheet_y": 80
+  },
+  {
+   "name": "CrystalShield",
+   "display_name": "Crystal Shield",
+   "category": "Shields",
+   "index": 109,
+   "file": "Items/Shields/CrystalShield.png",
+   "sheet_x": 144,
+   "sheet_y": 80
+  },
+  {
+   "name": "DragonShield",
+   "display_name": "Dragon Shield",
+   "category": "Shields",
+   "index": 110,
+   "file": "Items/Shields/DragonShield.png",
+   "sheet_x": 160,
+   "sheet_y": 80
+  },
+  {
+   "name": "SpikedShield",
+   "display_name": "Spiked Shield",
+   "category": "Shields",
+   "index": 111,
+   "file": "Items/Shields/SpikedShield.png",
+   "sheet_x": 176,
+   "sheet_y": 80
+  },
+  {
+   "name": "SkullShield",
+   "display_name": "Skull Shield",
+   "category": "Shields",
+   "index": 112,
+   "file": "Items/Shields/SkullShield.png",
+   "sheet_x": 192,
+   "sheet_y": 80
+  },
+  {
+   "name": "SunShield",
+   "display_name": "Sun Shield",
+   "category": "Shields",
+   "index": 113,
+   "file": "Items/Shields/SunShield.png",
+   "sheet_x": 208,
+   "sheet_y": 80
+  },
+  {
+   "name": "MoonShield",
+   "display_name": "Moon Shield",
+   "category": "Shields",
+   "index": 114,
+   "file": "Items/Shields/MoonShield.png",
+   "sheet_x": 224,
+   "sheet_y": 80
+  },
+  {
+   "name": "ElvenShield",
+   "display_name": "Elven Shield",
+   "category": "Shields",
+   "index": 115,
+   "file": "Items/Shields/ElvenShield.png",
+   "sheet_x": 240,
+   "sheet_y": 80
+  },
+  {
+   "name": "BoneShield",
+   "display_name": "Bone Shield",
+   "category": "Shields",
+   "index": 116,
+   "file": "Items/Shields/BoneShield.png",
+   "sheet_x": 256,
+   "sheet_y": 80
+  },
+  {
+   "name": "PotLid",
+   "display_name": "Pot Lid",
+   "category": "Shields",
+   "index": 117,
+   "file": "Items/Shields/PotLid.png",
+   "sheet_x": 272,
+   "sheet_y": 80
+  },
+  {
+   "name": "StarShield",
+   "display_name": "Star Shield",
+   "category": "Shields",
+   "index": 118,
+   "file": "Items/Shields/StarShield.png",
+   "sheet_x": 288,
+   "sheet_y": 80
+  },
+  {
+   "name": "LeatherShield",
+   "display_name": "Leather Shield",
+   "category": "Shields",
+   "index": 119,
+   "file": "Items/Shields/LeatherShield.png",
+   "sheet_x": 304,
+   "sheet_y": 80
+  },
+  {
+   "name": "LeatherCap",
+   "display_name": "Leather Cap",
+   "category": "Helmets",
+   "index": 120,
+   "file": "Items/Helmets/LeatherCap.png",
+   "sheet_x": 0,
+   "sheet_y": 96
+  },
+  {
+   "name": "Bandana",
+   "display_name": "Bandana",
+   "category": "Helmets",
+   "index": 121,
+   "file": "Items/Helmets/Bandana.png",
+   "sheet_x": 16,
+   "sheet_y": 96
+  },
+  {
+   "name": "Hood",
+   "display_name": "Hood",
+   "category": "Helmets",
+   "index": 122,
+   "file": "Items/Helmets/Hood.png",
+   "sheet_x": 32,
+   "sheet_y": 96
+  },
+  {
+   "name": "WizardHat",
+   "display_name": "Wizard Hat",
+   "category": "Helmets",
+   "index": 123,
+   "file": "Items/Helmets/WizardHat.png",
+   "sheet_x": 48,
+   "sheet_y": 96
+  },
+  {
+   "name": "WitchHat",
+   "display_name": "Witch Hat",
+   "category": "Helmets",
+   "index": 124,
+   "file": "Items/Helmets/WitchHat.png",
+   "sheet_x": 64,
+   "sheet_y": 96
+  },
+  {
+   "name": "StrawHat",
+   "display_name": "Straw Hat",
+   "category": "Helmets",
+   "index": 125,
+   "file": "Items/Helmets/StrawHat.png",
+   "sheet_x": 80,
+   "sheet_y": 96
+  },
+  {
+   "name": "PirateHat",
+   "display_name": "Pirate Hat",
+   "category": "Helmets",
+   "index": 126,
+   "file": "Items/Helmets/PirateHat.png",
+   "sheet_x": 96,
+   "sheet_y": 96
+  },
+  {
+   "name": "FeatheredCap",
+   "display_name": "Feathered Cap",
+   "category": "Helmets",
+   "index": 127,
+   "file": "Items/Helmets/FeatheredCap.png",
+   "sheet_x": 112,
+   "sheet_y": 96
+  },
+  {
+   "name": "ChainCoif",
+   "display_name": "Chain Coif",
+   "category": "Helmets",
+   "index": 128,
+   "file": "Items/Helmets/ChainCoif.png",
+   "sheet_x": 128,
+   "sheet_y": 96
+  },
+  {
+   "name": "IronHelm",
+   "display_name": "Iron Helm",
+   "category": "Helmets",
+   "index": 129,
+   "file": "Items/Helmets/IronHelm.png",
+   "sheet_x": 144,
+   "sheet_y": 96
+  },
+  {
+   "name": "KnightHelm",
+   "display_name": "Knight Helm",
+   "category": "Helmets",
+   "index": 130,
+   "file": "Items/Helmets/KnightHelm.png",
+   "sheet_x": 160,
+   "sheet_y": 96
+  },
+  {
+   "name": "PlumedHelm",
+   "display_name": "Plumed Helm",
+   "category": "Helmets",
+   "index": 131,
+   "file": "Items/Helmets/PlumedHelm.png",
+   "sheet_x": 176,
+   "sheet_y": 96
+  },
+  {
+   "name": "SpartanHelm",
+   "display_name": "Spartan Helm",
+   "category": "Helmets",
+   "index": 132,
+   "file": "Items/Helmets/SpartanHelm.png",
+   "sheet_x": 192,
+   "sheet_y": 96
+  },
+  {
+   "name": "VikingHelm",
+   "display_name": "Viking Helm",
+   "category": "Helmets",
+   "index": 133,
+   "file": "Items/Helmets/VikingHelm.png",
+   "sheet_x": 208,
+   "sheet_y": 96
+  },
+  {
+   "name": "GoldenHelm",
+   "display_name": "Golden Helm",
+   "category": "Helmets",
+   "index": 134,
+   "file": "Items/Helmets/GoldenHelm.png",
+   "sheet_x": 224,
+   "sheet_y": 96
+  },
+  {
+   "name": "CrystalHelm",
+   "display_name": "Crystal Helm",
+   "category": "Helmets",
+   "index": 135,
+   "file": "Items/Helmets/CrystalHelm.png",
+   "sheet_x": 240,
+   "sheet_y": 96
+  },
+  {
+   "name": "SkullHelm",
+   "display_name": "Skull Helm",
+   "category": "Helmets",
+   "index": 136,
+   "file": "Items/Helmets/SkullHelm.png",
+   "sheet_x": 256,
+   "sheet_y": 96
+  },
+  {
+   "name": "DragonHelm",
+   "display_name": "Dragon Helm",
+   "category": "Helmets",
+   "index": 137,
+   "file": "Items/Helmets/DragonHelm.png",
+   "sheet_x": 272,
+   "sheet_y": 96
+  },
+  {
+   "name": "SamuraiHelm",
+   "display_name": "Samurai Helm",
+   "category": "Helmets",
+   "index": 138,
+   "file": "Items/Helmets/SamuraiHelm.png",
+   "sheet_x": 288,
+   "sheet_y": 96
+  },
+  {
+   "name": "MinerHelmet",
+   "display_name": "Miner Helmet",
+   "category": "Helmets",
+   "index": 139,
+   "file": "Items/Helmets/MinerHelmet.png",
+   "sheet_x": 304,
+   "sheet_y": 96
+  },
+  {
+   "name": "ClothShirt",
+   "display_name": "Cloth Shirt",
+   "category": "Armor",
+   "index": 140,
+   "file": "Items/Armor/ClothShirt.png",
+   "sheet_x": 0,
+   "sheet_y": 112
+  },
+  {
+   "name": "LeatherArmor",
+   "display_name": "Leather Armor",
+   "category": "Armor",
+   "index": 141,
+   "file": "Items/Armor/LeatherArmor.png",
+   "sheet_x": 16,
+   "sheet_y": 112
+  },
+  {
+   "name": "ChainMail",
+   "display_name": "Chain Mail",
+   "category": "Armor",
+   "index": 142,
+   "file": "Items/Armor/ChainMail.png",
+   "sheet_x": 32,
+   "sheet_y": 112
+  },
+  {
+   "name": "IronArmor",
+   "display_name": "Iron Armor",
+   "category": "Armor",
+   "index": 143,
+   "file": "Items/Armor/IronArmor.png",
+   "sheet_x": 48,
+   "sheet_y": 112
+  },
+  {
+   "name": "GoldenArmor",
+   "display_name": "Golden Armor",
+   "category": "Armor",
+   "index": 144,
+   "file": "Items/Armor/GoldenArmor.png",
+   "sheet_x": 64,
+   "sheet_y": 112
+  },
+  {
+   "name": "CrystalArmor",
+   "display_name": "Crystal Armor",
+   "category": "Armor",
+   "index": 145,
+   "file": "Items/Armor/CrystalArmor.png",
+   "sheet_x": 80,
+   "sheet_y": 112
+  },
+  {
+   "name": "DragonArmor",
+   "display_name": "Dragon Armor",
+   "category": "Armor",
+   "index": 146,
+   "file": "Items/Armor/DragonArmor.png",
+   "sheet_x": 96,
+   "sheet_y": 112
+  },
+  {
+   "name": "MageRobe",
+   "display_name": "Mage Robe",
+   "category": "Armor",
+   "index": 147,
+   "file": "Items/Armor/MageRobe.png",
+   "sheet_x": 112,
+   "sheet_y": 112
+  },
+  {
+   "name": "DarkRobe",
+   "display_name": "Dark Robe",
+   "category": "Armor",
+   "index": 148,
+   "file": "Items/Armor/DarkRobe.png",
+   "sheet_x": 128,
+   "sheet_y": 112
+  },
+  {
+   "name": "LeatherPants",
+   "display_name": "Leather Pants",
+   "category": "Armor",
+   "index": 149,
+   "file": "Items/Armor/LeatherPants.png",
+   "sheet_x": 144,
+   "sheet_y": 112
+  },
+  {
+   "name": "IronGreaves",
+   "display_name": "Iron Greaves",
+   "category": "Armor",
+   "index": 150,
+   "file": "Items/Armor/IronGreaves.png",
+   "sheet_x": 160,
+   "sheet_y": 112
+  },
+  {
+   "name": "LeatherGloves",
+   "display_name": "Leather Gloves",
+   "category": "Armor",
+   "index": 151,
+   "file": "Items/Armor/LeatherGloves.png",
+   "sheet_x": 176,
+   "sheet_y": 112
+  },
+  {
+   "name": "IronGauntlets",
+   "display_name": "Iron Gauntlets",
+   "category": "Armor",
+   "index": 152,
+   "file": "Items/Armor/IronGauntlets.png",
+   "sheet_x": 192,
+   "sheet_y": 112
+  },
+  {
+   "name": "GoldenGauntlets",
+   "display_name": "Golden Gauntlets",
+   "category": "Armor",
+   "index": 153,
+   "file": "Items/Armor/GoldenGauntlets.png",
+   "sheet_x": 208,
+   "sheet_y": 112
+  },
+  {
+   "name": "MageGloves",
+   "display_name": "Mage Gloves",
+   "category": "Armor",
+   "index": 154,
+   "file": "Items/Armor/MageGloves.png",
+   "sheet_x": 224,
+   "sheet_y": 112
+  },
+  {
+   "name": "LeatherBoots",
+   "display_name": "Leather Boots",
+   "category": "Armor",
+   "index": 155,
+   "file": "Items/Armor/LeatherBoots.png",
+   "sheet_x": 240,
+   "sheet_y": 112
+  },
+  {
+   "name": "IronBoots",
+   "display_name": "Iron Boots",
+   "category": "Armor",
+   "index": 156,
+   "file": "Items/Armor/IronBoots.png",
+   "sheet_x": 256,
+   "sheet_y": 112
+  },
+  {
+   "name": "GoldenBoots",
+   "display_name": "Golden Boots",
+   "category": "Armor",
+   "index": 157,
+   "file": "Items/Armor/GoldenBoots.png",
+   "sheet_x": 272,
+   "sheet_y": 112
+  },
+  {
+   "name": "WingedBoots",
+   "display_name": "Winged Boots",
+   "category": "Armor",
+   "index": 158,
+   "file": "Items/Armor/WingedBoots.png",
+   "sheet_x": 288,
+   "sheet_y": 112
+  },
+  {
+   "name": "SpeedBoots",
+   "display_name": "Speed Boots",
+   "category": "Armor",
+   "index": 159,
+   "file": "Items/Armor/SpeedBoots.png",
+   "sheet_x": 304,
+   "sheet_y": 112
+  },
+  {
+   "name": "GoldRing",
+   "display_name": "Gold Ring",
+   "category": "Accessories",
+   "index": 160,
+   "file": "Items/Accessories/GoldRing.png",
+   "sheet_x": 0,
+   "sheet_y": 128
+  },
+  {
+   "name": "SilverRing",
+   "display_name": "Silver Ring",
+   "category": "Accessories",
+   "index": 161,
+   "file": "Items/Accessories/SilverRing.png",
+   "sheet_x": 16,
+   "sheet_y": 128
+  },
+  {
+   "name": "RubyRing",
+   "display_name": "Ruby Ring",
+   "category": "Accessories",
+   "index": 162,
+   "file": "Items/Accessories/RubyRing.png",
+   "sheet_x": 32,
+   "sheet_y": 128
+  },
+  {
+   "name": "SapphireRing",
+   "display_name": "Sapphire Ring",
+   "category": "Accessories",
+   "index": 163,
+   "file": "Items/Accessories/SapphireRing.png",
+   "sheet_x": 48,
+   "sheet_y": 128
+  },
+  {
+   "name": "EmeraldRing",
+   "display_name": "Emerald Ring",
+   "category": "Accessories",
+   "index": 164,
+   "file": "Items/Accessories/EmeraldRing.png",
+   "sheet_x": 64,
+   "sheet_y": 128
+  },
+  {
+   "name": "AmethystRing",
+   "display_name": "Amethyst Ring",
+   "category": "Accessories",
+   "index": 165,
+   "file": "Items/Accessories/AmethystRing.png",
+   "sheet_x": 80,
+   "sheet_y": 128
+  },
+  {
+   "name": "SkullRing",
+   "display_name": "Skull Ring",
+   "category": "Accessories",
+   "index": 166,
+   "file": "Items/Accessories/SkullRing.png",
+   "sheet_x": 96,
+   "sheet_y": 128
+  },
+  {
+   "name": "RubyAmulet",
+   "display_name": "Ruby Amulet",
+   "category": "Accessories",
+   "index": 167,
+   "file": "Items/Accessories/RubyAmulet.png",
+   "sheet_x": 112,
+   "sheet_y": 128
+  },
+  {
+   "name": "SapphireAmulet",
+   "display_name": "Sapphire Amulet",
+   "category": "Accessories",
+   "index": 168,
+   "file": "Items/Accessories/SapphireAmulet.png",
+   "sheet_x": 128,
+   "sheet_y": 128
+  },
+  {
+   "name": "EmeraldAmulet",
+   "display_name": "Emerald Amulet",
+   "category": "Accessories",
+   "index": 169,
+   "file": "Items/Accessories/EmeraldAmulet.png",
+   "sheet_x": 144,
+   "sheet_y": 128
+  },
+  {
+   "name": "EyeAmulet",
+   "display_name": "Eye Amulet",
+   "category": "Accessories",
+   "index": 170,
+   "file": "Items/Accessories/EyeAmulet.png",
+   "sheet_x": 160,
+   "sheet_y": 128
+  },
+  {
+   "name": "HeartLocket",
+   "display_name": "Heart Locket",
+   "category": "Accessories",
+   "index": 171,
+   "file": "Items/Accessories/HeartLocket.png",
+   "sheet_x": 176,
+   "sheet_y": 128
+  },
+  {
+   "name": "ToothNecklace",
+   "display_name": "Tooth Necklace",
+   "category": "Accessories",
+   "index": 172,
+   "file": "Items/Accessories/ToothNecklace.png",
+   "sheet_x": 192,
+   "sheet_y": 128
+  },
+  {
+   "name": "PearlNecklace",
+   "display_name": "Pearl Necklace",
+   "category": "Accessories",
+   "index": 173,
+   "file": "Items/Accessories/PearlNecklace.png",
+   "sheet_x": 208,
+   "sheet_y": 128
+  },
+  {
+   "name": "GoldCrown",
+   "display_name": "Gold Crown",
+   "category": "Accessories",
+   "index": 174,
+   "file": "Items/Accessories/GoldCrown.png",
+   "sheet_x": 224,
+   "sheet_y": 128
+  },
+  {
+   "name": "SilverTiara",
+   "display_name": "Silver Tiara",
+   "category": "Accessories",
+   "index": 175,
+   "file": "Items/Accessories/SilverTiara.png",
+   "sheet_x": 240,
+   "sheet_y": 128
+  },
+  {
+   "name": "Bracelet",
+   "display_name": "Bracelet",
+   "category": "Accessories",
+   "index": 176,
+   "file": "Items/Accessories/Bracelet.png",
+   "sheet_x": 256,
+   "sheet_y": 128
+  },
+  {
+   "name": "Belt",
+   "display_name": "Belt",
+   "category": "Accessories",
+   "index": 177,
+   "file": "Items/Accessories/Belt.png",
+   "sheet_x": 272,
+   "sheet_y": 128
+  },
+  {
+   "name": "RedCape",
+   "display_name": "Red Cape",
+   "category": "Accessories",
+   "index": 178,
+   "file": "Items/Accessories/RedCape.png",
+   "sheet_x": 288,
+   "sheet_y": 128
+  },
+  {
+   "name": "Medal",
+   "display_name": "Medal",
+   "category": "Accessories",
+   "index": 179,
+   "file": "Items/Accessories/Medal.png",
+   "sheet_x": 304,
+   "sheet_y": 128
+  },
+  {
+   "name": "SmallHealthPotion",
+   "display_name": "Small Health Potion",
+   "category": "Potions",
+   "index": 180,
+   "file": "Items/Potions/SmallHealthPotion.png",
+   "sheet_x": 0,
+   "sheet_y": 144
+  },
+  {
+   "name": "HealthPotion",
+   "display_name": "Health Potion",
+   "category": "Potions",
+   "index": 181,
+   "file": "Items/Potions/HealthPotion.png",
+   "sheet_x": 16,
+   "sheet_y": 144
+  },
+  {
+   "name": "BigHealthPotion",
+   "display_name": "Big Health Potion",
+   "category": "Potions",
+   "index": 182,
+   "file": "Items/Potions/BigHealthPotion.png",
+   "sheet_x": 32,
+   "sheet_y": 144
+  },
+  {
+   "name": "SmallManaPotion",
+   "display_name": "Small Mana Potion",
+   "category": "Potions",
+   "index": 183,
+   "file": "Items/Potions/SmallManaPotion.png",
+   "sheet_x": 48,
+   "sheet_y": 144
+  },
+  {
+   "name": "ManaPotion",
+   "display_name": "Mana Potion",
+   "category": "Potions",
+   "index": 184,
+   "file": "Items/Potions/ManaPotion.png",
+   "sheet_x": 64,
+   "sheet_y": 144
+  },
+  {
+   "name": "BigManaPotion",
+   "display_name": "Big Mana Potion",
+   "category": "Potions",
+   "index": 185,
+   "file": "Items/Potions/BigManaPotion.png",
+   "sheet_x": 80,
+   "sheet_y": 144
+  },
+  {
+   "name": "StaminaPotion",
+   "display_name": "Stamina Potion",
+   "category": "Potions",
+   "index": 186,
+   "file": "Items/Potions/StaminaPotion.png",
+   "sheet_x": 96,
+   "sheet_y": 144
+  },
+  {
+   "name": "PoisonFlask",
+   "display_name": "Poison Flask",
+   "category": "Potions",
+   "index": 187,
+   "file": "Items/Potions/PoisonFlask.png",
+   "sheet_x": 112,
+   "sheet_y": 144
+  },
+  {
+   "name": "Antidote",
+   "display_name": "Antidote",
+   "category": "Potions",
+   "index": 188,
+   "file": "Items/Potions/Antidote.png",
+   "sheet_x": 128,
+   "sheet_y": 144
+  },
+  {
+   "name": "SpeedPotion",
+   "display_name": "Speed Potion",
+   "category": "Potions",
+   "index": 189,
+   "file": "Items/Potions/SpeedPotion.png",
+   "sheet_x": 144,
+   "sheet_y": 144
+  },
+  {
+   "name": "StrengthPotion",
+   "display_name": "Strength Potion",
+   "category": "Potions",
+   "index": 190,
+   "file": "Items/Potions/StrengthPotion.png",
+   "sheet_x": 160,
+   "sheet_y": 144
+  },
+  {
+   "name": "DefensePotion",
+   "display_name": "Defense Potion",
+   "category": "Potions",
+   "index": 191,
+   "file": "Items/Potions/DefensePotion.png",
+   "sheet_x": 176,
+   "sheet_y": 144
+  },
+  {
+   "name": "InvisibilityPotion",
+   "display_name": "Invisibility Potion",
+   "category": "Potions",
+   "index": 192,
+   "file": "Items/Potions/InvisibilityPotion.png",
+   "sheet_x": 192,
+   "sheet_y": 144
+  },
+  {
+   "name": "FireResistPotion",
+   "display_name": "Fire Resist Potion",
+   "category": "Potions",
+   "index": 193,
+   "file": "Items/Potions/FireResistPotion.png",
+   "sheet_x": 208,
+   "sheet_y": 144
+  },
+  {
+   "name": "LovePotion",
+   "display_name": "Love Potion",
+   "category": "Potions",
+   "index": 194,
+   "file": "Items/Potions/LovePotion.png",
+   "sheet_x": 224,
+   "sheet_y": 144
+  },
+  {
+   "name": "LuckPotion",
+   "display_name": "Luck Potion",
+   "category": "Potions",
+   "index": 195,
+   "file": "Items/Potions/LuckPotion.png",
+   "sheet_x": 240,
+   "sheet_y": 144
+  },
+  {
+   "name": "Elixir",
+   "display_name": "Elixir",
+   "category": "Potions",
+   "index": 196,
+   "file": "Items/Potions/Elixir.png",
+   "sheet_x": 256,
+   "sheet_y": 144
+  },
+  {
+   "name": "ExpPotion",
+   "display_name": "Exp Potion",
+   "category": "Potions",
+   "index": 197,
+   "file": "Items/Potions/ExpPotion.png",
+   "sheet_x": 272,
+   "sheet_y": 144
+  },
+  {
+   "name": "EmptyBottle",
+   "display_name": "Empty Bottle",
+   "category": "Potions",
+   "index": 198,
+   "file": "Items/Potions/EmptyBottle.png",
+   "sheet_x": 288,
+   "sheet_y": 144
+  },
+  {
+   "name": "HolyWater",
+   "display_name": "Holy Water",
+   "category": "Potions",
+   "index": 199,
+   "file": "Items/Potions/HolyWater.png",
+   "sheet_x": 304,
+   "sheet_y": 144
+  },
+  {
+   "name": "Apple",
+   "display_name": "Apple",
+   "category": "Food",
+   "index": 200,
+   "file": "Items/Food/Apple.png",
+   "sheet_x": 0,
+   "sheet_y": 160
+  },
+  {
+   "name": "Grapes",
+   "display_name": "Grapes",
+   "category": "Food",
+   "index": 201,
+   "file": "Items/Food/Grapes.png",
+   "sheet_x": 16,
+   "sheet_y": 160
+  },
+  {
+   "name": "Carrot",
+   "display_name": "Carrot",
+   "category": "Food",
+   "index": 202,
+   "file": "Items/Food/Carrot.png",
+   "sheet_x": 32,
+   "sheet_y": 160
+  },
+  {
+   "name": "Mushroom",
+   "display_name": "Mushroom",
+   "category": "Food",
+   "index": 203,
+   "file": "Items/Food/Mushroom.png",
+   "sheet_x": 48,
+   "sheet_y": 160
+  },
+  {
+   "name": "Bread",
+   "display_name": "Bread",
+   "category": "Food",
+   "index": 204,
+   "file": "Items/Food/Bread.png",
+   "sheet_x": 64,
+   "sheet_y": 160
+  },
+  {
+   "name": "Cheese",
+   "display_name": "Cheese",
+   "category": "Food",
+   "index": 205,
+   "file": "Items/Food/Cheese.png",
+   "sheet_x": 80,
+   "sheet_y": 160
+  },
+  {
+   "name": "Egg",
+   "display_name": "Egg",
+   "category": "Food",
+   "index": 206,
+   "file": "Items/Food/Egg.png",
+   "sheet_x": 96,
+   "sheet_y": 160
+  },
+  {
+   "name": "Drumstick",
+   "display_name": "Drumstick",
+   "category": "Food",
+   "index": 207,
+   "file": "Items/Food/Drumstick.png",
+   "sheet_x": 112,
+   "sheet_y": 160
+  },
+  {
+   "name": "Steak",
+   "display_name": "Steak",
+   "category": "Food",
+   "index": 208,
+   "file": "Items/Food/Steak.png",
+   "sheet_x": 128,
+   "sheet_y": 160
+  },
+  {
+   "name": "RawFish",
+   "display_name": "Raw Fish",
+   "category": "Food",
+   "index": 209,
+   "file": "Items/Food/RawFish.png",
+   "sheet_x": 144,
+   "sheet_y": 160
+  },
+  {
+   "name": "CookedFish",
+   "display_name": "Cooked Fish",
+   "category": "Food",
+   "index": 210,
+   "file": "Items/Food/CookedFish.png",
+   "sheet_x": 160,
+   "sheet_y": 160
+  },
+  {
+   "name": "Pie",
+   "display_name": "Pie",
+   "category": "Food",
+   "index": 211,
+   "file": "Items/Food/Pie.png",
+   "sheet_x": 176,
+   "sheet_y": 160
+  },
+  {
+   "name": "Cookie",
+   "display_name": "Cookie",
+   "category": "Food",
+   "index": 212,
+   "file": "Items/Food/Cookie.png",
+   "sheet_x": 192,
+   "sheet_y": 160
+  },
+  {
+   "name": "Honey",
+   "display_name": "Honey",
+   "category": "Food",
+   "index": 213,
+   "file": "Items/Food/Honey.png",
+   "sheet_x": 208,
+   "sheet_y": 160
+  },
+  {
+   "name": "Milk",
+   "display_name": "Milk",
+   "category": "Food",
+   "index": 214,
+   "file": "Items/Food/Milk.png",
+   "sheet_x": 224,
+   "sheet_y": 160
+  },
+  {
+   "name": "AleMug",
+   "display_name": "Ale Mug",
+   "category": "Food",
+   "index": 215,
+   "file": "Items/Food/AleMug.png",
+   "sheet_x": 240,
+   "sheet_y": 160
+  },
+  {
+   "name": "Stew",
+   "display_name": "Stew",
+   "category": "Food",
+   "index": 216,
+   "file": "Items/Food/Stew.png",
+   "sheet_x": 256,
+   "sheet_y": 160
+  },
+  {
+   "name": "WatermelonSlice",
+   "display_name": "Watermelon Slice",
+   "category": "Food",
+   "index": 217,
+   "file": "Items/Food/WatermelonSlice.png",
+   "sheet_x": 272,
+   "sheet_y": 160
+  },
+  {
+   "name": "CakeSlice",
+   "display_name": "Cake Slice",
+   "category": "Food",
+   "index": 218,
+   "file": "Items/Food/CakeSlice.png",
+   "sheet_x": 288,
+   "sheet_y": 160
+  },
+  {
+   "name": "Cherries",
+   "display_name": "Cherries",
+   "category": "Food",
+   "index": 219,
+   "file": "Items/Food/Cherries.png",
+   "sheet_x": 304,
+   "sheet_y": 160
+  },
+  {
+   "name": "Stone",
+   "display_name": "Stone",
+   "category": "Materials",
+   "index": 220,
+   "file": "Items/Materials/Stone.png",
+   "sheet_x": 0,
+   "sheet_y": 176
+  },
+  {
+   "name": "Coal",
+   "display_name": "Coal",
+   "category": "Materials",
+   "index": 221,
+   "file": "Items/Materials/Coal.png",
+   "sheet_x": 16,
+   "sheet_y": 176
+  },
+  {
+   "name": "CopperOre",
+   "display_name": "Copper Ore",
+   "category": "Materials",
+   "index": 222,
+   "file": "Items/Materials/CopperOre.png",
+   "sheet_x": 32,
+   "sheet_y": 176
+  },
+  {
+   "name": "IronOre",
+   "display_name": "Iron Ore",
+   "category": "Materials",
+   "index": 223,
+   "file": "Items/Materials/IronOre.png",
+   "sheet_x": 48,
+   "sheet_y": 176
+  },
+  {
+   "name": "GoldOre",
+   "display_name": "Gold Ore",
+   "category": "Materials",
+   "index": 224,
+   "file": "Items/Materials/GoldOre.png",
+   "sheet_x": 64,
+   "sheet_y": 176
+  },
+  {
+   "name": "MythrilOre",
+   "display_name": "Mythril Ore",
+   "category": "Materials",
+   "index": 225,
+   "file": "Items/Materials/MythrilOre.png",
+   "sheet_x": 80,
+   "sheet_y": 176
+  },
+  {
+   "name": "CopperIngot",
+   "display_name": "Copper Ingot",
+   "category": "Materials",
+   "index": 226,
+   "file": "Items/Materials/CopperIngot.png",
+   "sheet_x": 96,
+   "sheet_y": 176
+  },
+  {
+   "name": "IronIngot",
+   "display_name": "Iron Ingot",
+   "category": "Materials",
+   "index": 227,
+   "file": "Items/Materials/IronIngot.png",
+   "sheet_x": 112,
+   "sheet_y": 176
+  },
+  {
+   "name": "GoldIngot",
+   "display_name": "Gold Ingot",
+   "category": "Materials",
+   "index": 228,
+   "file": "Items/Materials/GoldIngot.png",
+   "sheet_x": 128,
+   "sheet_y": 176
+  },
+  {
+   "name": "Log",
+   "display_name": "Log",
+   "category": "Materials",
+   "index": 229,
+   "file": "Items/Materials/Log.png",
+   "sheet_x": 144,
+   "sheet_y": 176
+  },
+  {
+   "name": "Planks",
+   "display_name": "Planks",
+   "category": "Materials",
+   "index": 230,
+   "file": "Items/Materials/Planks.png",
+   "sheet_x": 160,
+   "sheet_y": 176
+  },
+  {
+   "name": "Leather",
+   "display_name": "Leather",
+   "category": "Materials",
+   "index": 231,
+   "file": "Items/Materials/Leather.png",
+   "sheet_x": 176,
+   "sheet_y": 176
+  },
+  {
+   "name": "Cloth",
+   "display_name": "Cloth",
+   "category": "Materials",
+   "index": 232,
+   "file": "Items/Materials/Cloth.png",
+   "sheet_x": 192,
+   "sheet_y": 176
+  },
+  {
+   "name": "Thread",
+   "display_name": "Thread",
+   "category": "Materials",
+   "index": 233,
+   "file": "Items/Materials/Thread.png",
+   "sheet_x": 208,
+   "sheet_y": 176
+  },
+  {
+   "name": "Bone",
+   "display_name": "Bone",
+   "category": "Materials",
+   "index": 234,
+   "file": "Items/Materials/Bone.png",
+   "sheet_x": 224,
+   "sheet_y": 176
+  },
+  {
+   "name": "Feather",
+   "display_name": "Feather",
+   "category": "Materials",
+   "index": 235,
+   "file": "Items/Materials/Feather.png",
+   "sheet_x": 240,
+   "sheet_y": 176
+  },
+  {
+   "name": "Herb",
+   "display_name": "Herb",
+   "category": "Materials",
+   "index": 236,
+   "file": "Items/Materials/Herb.png",
+   "sheet_x": 256,
+   "sheet_y": 176
+  },
+  {
+   "name": "Slime",
+   "display_name": "Slime",
+   "category": "Materials",
+   "index": 237,
+   "file": "Items/Materials/Slime.png",
+   "sheet_x": 272,
+   "sheet_y": 176
+  },
+  {
+   "name": "Fang",
+   "display_name": "Fang",
+   "category": "Materials",
+   "index": 238,
+   "file": "Items/Materials/Fang.png",
+   "sheet_x": 288,
+   "sheet_y": 176
+  },
+  {
+   "name": "DragonScale",
+   "display_name": "Dragon Scale",
+   "category": "Materials",
+   "index": 239,
+   "file": "Items/Materials/DragonScale.png",
+   "sheet_x": 304,
+   "sheet_y": 176
+  },
+  {
+   "name": "CoinStack",
+   "display_name": "Coin Stack",
+   "category": "Treasure",
+   "index": 240,
+   "file": "Items/Treasure/CoinStack.png",
+   "sheet_x": 0,
+   "sheet_y": 192
+  },
+  {
+   "name": "CoinPouch",
+   "display_name": "Coin Pouch",
+   "category": "Treasure",
+   "index": 241,
+   "file": "Items/Treasure/CoinPouch.png",
+   "sheet_x": 16,
+   "sheet_y": 192
+  },
+  {
+   "name": "Chalice",
+   "display_name": "Chalice",
+   "category": "Treasure",
+   "index": 242,
+   "file": "Items/Treasure/Chalice.png",
+   "sheet_x": 32,
+   "sheet_y": 192
+  },
+  {
+   "name": "Ruby",
+   "display_name": "Ruby",
+   "category": "Treasure",
+   "index": 243,
+   "file": "Items/Treasure/Ruby.png",
+   "sheet_x": 48,
+   "sheet_y": 192
+  },
+  {
+   "name": "Sapphire",
+   "display_name": "Sapphire",
+   "category": "Treasure",
+   "index": 244,
+   "file": "Items/Treasure/Sapphire.png",
+   "sheet_x": 64,
+   "sheet_y": 192
+  },
+  {
+   "name": "Emerald",
+   "display_name": "Emerald",
+   "category": "Treasure",
+   "index": 245,
+   "file": "Items/Treasure/Emerald.png",
+   "sheet_x": 80,
+   "sheet_y": 192
+  },
+  {
+   "name": "Topaz",
+   "display_name": "Topaz",
+   "category": "Treasure",
+   "index": 246,
+   "file": "Items/Treasure/Topaz.png",
+   "sheet_x": 96,
+   "sheet_y": 192
+  },
+  {
+   "name": "Diamond",
+   "display_name": "Diamond",
+   "category": "Treasure",
+   "index": 247,
+   "file": "Items/Treasure/Diamond.png",
+   "sheet_x": 112,
+   "sheet_y": 192
+  },
+  {
+   "name": "Amethyst",
+   "display_name": "Amethyst",
+   "category": "Treasure",
+   "index": 248,
+   "file": "Items/Treasure/Amethyst.png",
+   "sheet_x": 128,
+   "sheet_y": 192
+  },
+  {
+   "name": "Pearl",
+   "display_name": "Pearl",
+   "category": "Treasure",
+   "index": 249,
+   "file": "Items/Treasure/Pearl.png",
+   "sheet_x": 144,
+   "sheet_y": 192
+  },
+  {
+   "name": "GoldCoin",
+   "display_name": "Gold Coin",
+   "category": "Treasure",
+   "index": 250,
+   "file": "Items/Treasure/GoldCoin.png",
+   "sheet_x": 160,
+   "sheet_y": 192
+  },
+  {
+   "name": "SilverCoin",
+   "display_name": "Silver Coin",
+   "category": "Treasure",
+   "index": 251,
+   "file": "Items/Treasure/SilverCoin.png",
+   "sheet_x": 176,
+   "sheet_y": 192
+  },
+  {
+   "name": "CopperCoin",
+   "display_name": "Copper Coin",
+   "category": "Treasure",
+   "index": 252,
+   "file": "Items/Treasure/CopperCoin.png",
+   "sheet_x": 192,
+   "sheet_y": 192
+  },
+  {
+   "name": "WoodenChest",
+   "display_name": "Wooden Chest",
+   "category": "Treasure",
+   "index": 253,
+   "file": "Items/Treasure/WoodenChest.png",
+   "sheet_x": 208,
+   "sheet_y": 192
+  },
+  {
+   "name": "GoldenChest",
+   "display_name": "Golden Chest",
+   "category": "Treasure",
+   "index": 254,
+   "file": "Items/Treasure/GoldenChest.png",
+   "sheet_x": 224,
+   "sheet_y": 192
+  },
+  {
+   "name": "OpenChest",
+   "display_name": "Open Chest",
+   "category": "Treasure",
+   "index": 255,
+   "file": "Items/Treasure/OpenChest.png",
+   "sheet_x": 240,
+   "sheet_y": 192
+  },
+  {
+   "name": "IronKey",
+   "display_name": "Iron Key",
+   "category": "Treasure",
+   "index": 256,
+   "file": "Items/Treasure/IronKey.png",
+   "sheet_x": 256,
+   "sheet_y": 192
+  },
+  {
+   "name": "GoldKey",
+   "display_name": "Gold Key",
+   "category": "Treasure",
+   "index": 257,
+   "file": "Items/Treasure/GoldKey.png",
+   "sheet_x": 272,
+   "sheet_y": 192
+  },
+  {
+   "name": "CrystalKey",
+   "display_name": "Crystal Key",
+   "category": "Treasure",
+   "index": 258,
+   "file": "Items/Treasure/CrystalKey.png",
+   "sheet_x": 288,
+   "sheet_y": 192
+  },
+  {
+   "name": "SkullKey",
+   "display_name": "Skull Key",
+   "category": "Treasure",
+   "index": 259,
+   "file": "Items/Treasure/SkullKey.png",
+   "sheet_x": 304,
+   "sheet_y": 192
+  },
+  {
+   "name": "Scroll",
+   "display_name": "Scroll",
+   "category": "Scrolls & Books",
+   "index": 260,
+   "file": "Items/Scrolls_Books/Scroll.png",
+   "sheet_x": 0,
+   "sheet_y": 208
+  },
+  {
+   "name": "Map",
+   "display_name": "Map",
+   "category": "Scrolls & Books",
+   "index": 261,
+   "file": "Items/Scrolls_Books/Map.png",
+   "sheet_x": 16,
+   "sheet_y": 208
+  },
+  {
+   "name": "Letter",
+   "display_name": "Letter",
+   "category": "Scrolls & Books",
+   "index": 262,
+   "file": "Items/Scrolls_Books/Letter.png",
+   "sheet_x": 32,
+   "sheet_y": 208
+  },
+  {
+   "name": "QuestNotice",
+   "display_name": "Quest Notice",
+   "category": "Scrolls & Books",
+   "index": 263,
+   "file": "Items/Scrolls_Books/QuestNotice.png",
+   "sheet_x": 48,
+   "sheet_y": 208
+  },
+  {
+   "name": "OpenBook",
+   "display_name": "Open Book",
+   "category": "Scrolls & Books",
+   "index": 264,
+   "file": "Items/Scrolls_Books/OpenBook.png",
+   "sheet_x": 64,
+   "sheet_y": 208
+  },
+  {
+   "name": "QuillInk",
+   "display_name": "Quill Ink",
+   "category": "Scrolls & Books",
+   "index": 265,
+   "file": "Items/Scrolls_Books/QuillInk.png",
+   "sheet_x": 80,
+   "sheet_y": 208
+  },
+  {
+   "name": "FireScroll",
+   "display_name": "Fire Scroll",
+   "category": "Scrolls & Books",
+   "index": 266,
+   "file": "Items/Scrolls_Books/FireScroll.png",
+   "sheet_x": 96,
+   "sheet_y": 208
+  },
+  {
+   "name": "IceScroll",
+   "display_name": "Ice Scroll",
+   "category": "Scrolls & Books",
+   "index": 267,
+   "file": "Items/Scrolls_Books/IceScroll.png",
+   "sheet_x": 112,
+   "sheet_y": 208
+  },
+  {
+   "name": "ThunderScroll",
+   "display_name": "Thunder Scroll",
+   "category": "Scrolls & Books",
+   "index": 268,
+   "file": "Items/Scrolls_Books/ThunderScroll.png",
+   "sheet_x": 128,
+   "sheet_y": 208
+  },
+  {
+   "name": "HealScroll",
+   "display_name": "Heal Scroll",
+   "category": "Scrolls & Books",
+   "index": 269,
+   "file": "Items/Scrolls_Books/HealScroll.png",
+   "sheet_x": 144,
+   "sheet_y": 208
+  },
+  {
+   "name": "RedBook",
+   "display_name": "Red Book",
+   "category": "Scrolls & Books",
+   "index": 270,
+   "file": "Items/Scrolls_Books/RedBook.png",
+   "sheet_x": 160,
+   "sheet_y": 208
+  },
+  {
+   "name": "BlueBook",
+   "display_name": "Blue Book",
+   "category": "Scrolls & Books",
+   "index": 271,
+   "file": "Items/Scrolls_Books/BlueBook.png",
+   "sheet_x": 176,
+   "sheet_y": 208
+  },
+  {
+   "name": "GreenBook",
+   "display_name": "Green Book",
+   "category": "Scrolls & Books",
+   "index": 272,
+   "file": "Items/Scrolls_Books/GreenBook.png",
+   "sheet_x": 192,
+   "sheet_y": 208
+  },
+  {
+   "name": "Grimoire",
+   "display_name": "Grimoire",
+   "category": "Scrolls & Books",
+   "index": 273,
+   "file": "Items/Scrolls_Books/Grimoire.png",
+   "sheet_x": 208,
+   "sheet_y": 208
+  },
+  {
+   "name": "HolyBook",
+   "display_name": "Holy Book",
+   "category": "Scrolls & Books",
+   "index": 274,
+   "file": "Items/Scrolls_Books/HolyBook.png",
+   "sheet_x": 224,
+   "sheet_y": 208
+  },
+  {
+   "name": "Journal",
+   "display_name": "Journal",
+   "category": "Scrolls & Books",
+   "index": 275,
+   "file": "Items/Scrolls_Books/Journal.png",
+   "sheet_x": 240,
+   "sheet_y": 208
+  },
+  {
+   "name": "FireRune",
+   "display_name": "Fire Rune",
+   "category": "Scrolls & Books",
+   "index": 276,
+   "file": "Items/Scrolls_Books/FireRune.png",
+   "sheet_x": 256,
+   "sheet_y": 208
+  },
+  {
+   "name": "WaterRune",
+   "display_name": "Water Rune",
+   "category": "Scrolls & Books",
+   "index": 277,
+   "file": "Items/Scrolls_Books/WaterRune.png",
+   "sheet_x": 272,
+   "sheet_y": 208
+  },
+  {
+   "name": "EarthRune",
+   "display_name": "Earth Rune",
+   "category": "Scrolls & Books",
+   "index": 278,
+   "file": "Items/Scrolls_Books/EarthRune.png",
+   "sheet_x": 288,
+   "sheet_y": 208
+  },
+  {
+   "name": "WindRune",
+   "display_name": "Wind Rune",
+   "category": "Scrolls & Books",
+   "index": 279,
+   "file": "Items/Scrolls_Books/WindRune.png",
+   "sheet_x": 304,
+   "sheet_y": 208
+  },
+  {
+   "name": "Pickaxe",
+   "display_name": "Pickaxe",
+   "category": "Tools",
+   "index": 280,
+   "file": "Items/Tools/Pickaxe.png",
+   "sheet_x": 0,
+   "sheet_y": 224
+  },
+  {
+   "name": "GoldPickaxe",
+   "display_name": "Gold Pickaxe",
+   "category": "Tools",
+   "index": 281,
+   "file": "Items/Tools/GoldPickaxe.png",
+   "sheet_x": 16,
+   "sheet_y": 224
+  },
+  {
+   "name": "Shovel",
+   "display_name": "Shovel",
+   "category": "Tools",
+   "index": 282,
+   "file": "Items/Tools/Shovel.png",
+   "sheet_x": 32,
+   "sheet_y": 224
+  },
+  {
+   "name": "Hoe",
+   "display_name": "Hoe",
+   "category": "Tools",
+   "index": 283,
+   "file": "Items/Tools/Hoe.png",
+   "sheet_x": 48,
+   "sheet_y": 224
+  },
+  {
+   "name": "WateringCan",
+   "display_name": "Watering Can",
+   "category": "Tools",
+   "index": 284,
+   "file": "Items/Tools/WateringCan.png",
+   "sheet_x": 64,
+   "sheet_y": 224
+  },
+  {
+   "name": "FishingRod",
+   "display_name": "Fishing Rod",
+   "category": "Tools",
+   "index": 285,
+   "file": "Items/Tools/FishingRod.png",
+   "sheet_x": 80,
+   "sheet_y": 224
+  },
+  {
+   "name": "Saw",
+   "display_name": "Saw",
+   "category": "Tools",
+   "index": 286,
+   "file": "Items/Tools/Saw.png",
+   "sheet_x": 96,
+   "sheet_y": 224
+  },
+  {
+   "name": "Torch",
+   "display_name": "Torch",
+   "category": "Tools",
+   "index": 287,
+   "file": "Items/Tools/Torch.png",
+   "sheet_x": 112,
+   "sheet_y": 224
+  },
+  {
+   "name": "Lantern",
+   "display_name": "Lantern",
+   "category": "Tools",
+   "index": 288,
+   "file": "Items/Tools/Lantern.png",
+   "sheet_x": 128,
+   "sheet_y": 224
+  },
+  {
+   "name": "Candle",
+   "display_name": "Candle",
+   "category": "Tools",
+   "index": 289,
+   "file": "Items/Tools/Candle.png",
+   "sheet_x": 144,
+   "sheet_y": 224
+  },
+  {
+   "name": "Rope",
+   "display_name": "Rope",
+   "category": "Tools",
+   "index": 290,
+   "file": "Items/Tools/Rope.png",
+   "sheet_x": 160,
+   "sheet_y": 224
+  },
+  {
+   "name": "Bomb",
+   "display_name": "Bomb",
+   "category": "Tools",
+   "index": 291,
+   "file": "Items/Tools/Bomb.png",
+   "sheet_x": 176,
+   "sheet_y": 224
+  },
+  {
+   "name": "Compass",
+   "display_name": "Compass",
+   "category": "Tools",
+   "index": 292,
+   "file": "Items/Tools/Compass.png",
+   "sheet_x": 192,
+   "sheet_y": 224
+  },
+  {
+   "name": "Hourglass",
+   "display_name": "Hourglass",
+   "category": "Tools",
+   "index": 293,
+   "file": "Items/Tools/Hourglass.png",
+   "sheet_x": 208,
+   "sheet_y": 224
+  },
+  {
+   "name": "Spyglass",
+   "display_name": "Spyglass",
+   "category": "Tools",
+   "index": 294,
+   "file": "Items/Tools/Spyglass.png",
+   "sheet_x": 224,
+   "sheet_y": 224
+  },
+  {
+   "name": "Backpack",
+   "display_name": "Backpack",
+   "category": "Tools",
+   "index": 295,
+   "file": "Items/Tools/Backpack.png",
+   "sheet_x": 240,
+   "sheet_y": 224
+  },
+  {
+   "name": "Bucket",
+   "display_name": "Bucket",
+   "category": "Tools",
+   "index": 296,
+   "file": "Items/Tools/Bucket.png",
+   "sheet_x": 256,
+   "sheet_y": 224
+  },
+  {
+   "name": "Lockpick",
+   "display_name": "Lockpick",
+   "category": "Tools",
+   "index": 297,
+   "file": "Items/Tools/Lockpick.png",
+   "sheet_x": 272,
+   "sheet_y": 224
+  },
+  {
+   "name": "Bandage",
+   "display_name": "Bandage",
+   "category": "Tools",
+   "index": 298,
+   "file": "Items/Tools/Bandage.png",
+   "sheet_x": 288,
+   "sheet_y": 224
+  },
+  {
+   "name": "Anvil",
+   "display_name": "Anvil",
+   "category": "Tools",
+   "index": 299,
+   "file": "Items/Tools/Anvil.png",
+   "sheet_x": 304,
+   "sheet_y": 224
+  }
+ ]
+}
